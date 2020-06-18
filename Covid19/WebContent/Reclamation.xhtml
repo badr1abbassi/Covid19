@@ -57,7 +57,7 @@
 		<h:inputTextarea  value="#{reclamation.details}" cols="30" rows="10" />
 		</div>
 		<h:commandButton value="Login" action="#{reclamation.action}" >
-			    <f:setPropertyActionListener target="#{reclamation.user}" value="badr" />
+			    <f:setPropertyActionListener target="#{reclamation.user}" value="#{accueil.login}" />
 		</h:commandButton>
 	</h:form>
 

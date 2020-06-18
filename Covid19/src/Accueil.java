@@ -16,6 +16,11 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 
+import org.primefaces.model.chart.Axis;
+import org.primefaces.model.chart.AxisType;
+import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.ChartSeries;
+import org.primefaces.model.chart.HorizontalBarChartModel;
 @ManagedBean
 public class Accueil {
 	private int totalCase;
@@ -31,10 +36,10 @@ public class Accueil {
 	private String login;
 	private String mdp;
 	private ArrayList<StatisticsRegion> listeStatisticsRegion;
-
+	private BarChartModel barModel;
 	public Accueil() {
 		// totalCase=11;newCase=1;TotalDeaths=0;newDeaths=0;totalRecovered=10;newRecovered=2;activeCases=0;totalTests=0;newTests=0;
-
+		createBarModel();
 		try {
 			FileInputStream serviceAccount = new FileInputStream(
 					"C:/Users/badre/git/Covid19/Covid19/serviceAccount.json");
@@ -81,6 +86,14 @@ public class Accueil {
 
 	public void initiaize() {
 
+	}
+
+	public BarChartModel getBarModel() {
+		return barModel;
+	}
+
+	public void setBarModel(BarChartModel barModel) {
+		this.barModel = barModel;
 	}
 
 	public ArrayList<StatisticsRegion> getListeStatisticsRegion() {
@@ -199,4 +212,49 @@ public class Accueil {
 	public String consulter() {
 			return "Reclamation";
 	}
+	
+	  private HorizontalBarChartModel initBarModel() {
+		  HorizontalBarChartModel model = new HorizontalBarChartModel();
+	 
+	        ChartSeries totalCaseGr = new ChartSeries();
+	        totalCaseGr.setLabel("total Case");
+	        totalCaseGr.set("aujourd huit", 152);
+
+	 
+	        ChartSeries TotalDeathsGr = new ChartSeries();
+	        TotalDeathsGr.setLabel("Total Deaths");
+	        TotalDeathsGr.set("aujourd huit", 20);
+	       
+	        
+	        ChartSeries totalRecoveredGr = new ChartSeries();
+	        totalRecoveredGr.setLabel("total Recovered");
+	        totalRecoveredGr.set("aujourd huit", 52);
+
+	        ChartSeries totalTestsGr = new ChartSeries();
+	        totalTestsGr.setLabel("total Tests");
+	        totalTestsGr.set("aujourd huit", 1052);
+
+	        
+	        
+	        model.addSeries(totalCaseGr);
+	        model.addSeries(TotalDeathsGr);
+	        model.addSeries(totalRecoveredGr);
+	        model.addSeries(totalTestsGr);
+
+	        return model;
+	    }
+	
+	  private void createBarModel() {
+	        barModel = initBarModel();
+	 
+	        barModel.setTitle("Bar Chart");
+	        barModel.setLegendPosition("ne");
+	 
+	        Axis xAxis = barModel.getAxis(AxisType.X);
+	        xAxis.setLabel("jours");
+	        Axis yAxis = barModel.getAxis(AxisType.Y);
+	        yAxis.setLabel("cas");
+	        yAxis.setMin(0);
+	        yAxis.setMax(200);
+	    }
 }
