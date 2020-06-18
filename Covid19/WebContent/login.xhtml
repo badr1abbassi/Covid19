@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title>Premier</title>
+    </h:head>
+    <h:body>
+    	<h1>Login</h1>
+    	<h:form>
+    	  <label>Login:</label><h:inputText value="#{login.login}" />
+    	   <label>mdp: </label><h:inputText value="#{login.mdp}"/>
+    	   <h:commandButton value="Login" action="#{login.action}" />
+    	</h:form>
+    </h:body>
+</html>
