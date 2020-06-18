@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>ApplicationStatus</title>
+</h:head>
+<h:body>
+	<h:form>
+		<h1>Consulter notre docteur</h1>
+		<div class="row">
+		
+		</div>
+		<div class="row">
+		<label>degree de toux:</label>
+		<h:selectOneRadio value="#{reclamation.toux}">
+			<f:selectItem itemValue="faible" itemLabel="faible" />
+			<f:selectItem itemValue="moyen" itemLabel="moyen" />
+			<f:selectItem itemValue="grave" itemLabel="grave" />
+		</h:selectOneRadio>
+		</div>
+			<div class="row">
+		<label>degree de fievre:</label>
+		<h:selectOneRadio value="#{reclamation.fievre}">
+			<f:selectItem itemValue="faible" itemLabel="faible" />
+			<f:selectItem itemValue="moyen" itemLabel="moyen" />
+			<f:selectItem itemValue="grave" itemLabel="grave" />
+		</h:selectOneRadio>
+		</div>
+		<div class="row">
+		<label>degree de respiration:</label>
+		<h:selectOneRadio value="#{reclamation.diffRespiratoire}">
+			<f:selectItem itemValue="faible" itemLabel="faible" />
+			<f:selectItem itemValue="moyen" itemLabel="moyen" />
+			<f:selectItem itemValue="grave" itemLabel="grave" />
+		</h:selectOneRadio>
+		</div>
+			<div class="row">
+		<label>fatigue:</label>
+		<h:selectOneRadio value="#{reclamation.fatigue}">
+			<f:selectItem itemValue="oui" itemLabel="oui" />
+			<f:selectItem itemValue="non" itemLabel="non" />			
+		</h:selectOneRadio>
+		</div>
+		
+			<div class="row">
+		<label>vous avez un pneumonie:</label>
+		<h:selectOneRadio value="#{reclamation.pneumonie}">
+			<f:selectItem itemValue="oui" itemLabel="oui" />
+			<f:selectItem itemValue="non" itemLabel="non" />
+			<f:selectItem itemValue="aucune idee" itemLabel="aucune idee" />
+		</h:selectOneRadio>
+		</div>
+		<div class="row">
+		<label>plus de details:</label>
+		<h:inputTextarea  value="#{reclamation.details}" cols="30" rows="10" />
+		</div>
+		<h:commandButton value="Login" action="#{reclamation.action}" >
+			    <f:setPropertyActionListener target="#{reclamation.user}" value="badr" />
+		</h:commandButton>
+	</h:form>
+
+</h:body>
+</html>

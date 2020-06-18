@@ -1,4 +1,6 @@
 import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 
@@ -7,6 +9,8 @@ import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.QueryDocumentSnapshot;
+import com.google.cloud.firestore.QuerySnapshot;
 import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
@@ -26,34 +30,50 @@ public class Accueil {
 	private String message;
 	private String login;
 	private String mdp;
+	private ArrayList<StatisticsRegion> listeStatisticsRegion;
 
 	public Accueil() {
 		// totalCase=11;newCase=1;TotalDeaths=0;newDeaths=0;totalRecovered=10;newRecovered=2;activeCases=0;totalTests=0;newTests=0;
 
 		try {
-			FileInputStream serviceAccount = new FileInputStream("C:/JEEWorkspace/Covid19/serviceAccount.json");
+			FileInputStream serviceAccount = new FileInputStream(
+					"C:/Users/badre/git/Covid19/Covid19/serviceAccount.json");
 			FirebaseOptions options = new FirebaseOptions.Builder()
 					.setCredentials(GoogleCredentials.fromStream(serviceAccount))
 					.setDatabaseUrl("https://covid19-10abd.firebaseio.com").build();
+			if (FirebaseApp.getApps().isEmpty()) { // <--- check with this line
+				FirebaseApp.initializeApp(options);
+			}
 
-			FirebaseApp.initializeApp(options);
-			DocumentReference docRef = FirestoreClient.getFirestore().collection("coivid19").document("NpFudp8J0Rn6AnkBDCN5");
+			// get values
+			DocumentReference docRef = FirestoreClient.getFirestore().collection("coivid19")
+					.document("NpFudp8J0Rn6AnkBDCN5");
 			// asynchronously retrieve the document
 			ApiFuture<DocumentSnapshot> future = docRef.get();
 			DocumentSnapshot document = future.get();
 			if (document.exists()) {
-				totalCase=Math.toIntExact((Long)document.get("totalCase"));
-				newCase=Math.toIntExact((Long)document.get("newCase"));
-				newRecovered=Math.toIntExact((Long)document.get("newRecovered"));
-				newDeaths=Math.toIntExact((Long)document.get("newDeaths"));
-				newTests=Math.toIntExact((Long)document.get("newTests"));
-				totalRecovered=Math.toIntExact((Long)document.get("totalRecovered"));
-				TotalDeaths=Math.toIntExact((Long)document.get("TotalDeaths"));
-				activeCases=Math.toIntExact((Long)document.get("activeCases"));
-				totalTests=Math.toIntExact((Long)document.get("totalTests"));
+				totalCase = Math.toIntExact((Long) document.get("totalCase"));
+				newCase = Math.toIntExact((Long) document.get("newCase"));
+				newRecovered = Math.toIntExact((Long) document.get("newRecovered"));
+				newDeaths = Math.toIntExact((Long) document.get("newDeaths"));
+				newTests = Math.toIntExact((Long) document.get("newTests"));
+				totalRecovered = Math.toIntExact((Long) document.get("totalRecovered"));
+				TotalDeaths = Math.toIntExact((Long) document.get("TotalDeaths"));
+				activeCases = Math.toIntExact((Long) document.get("activeCases"));
+				totalTests = Math.toIntExact((Long) document.get("totalTests"));
 			} else {
 				System.out.println("No such document!");
 			}
+			listeStatisticsRegion = new ArrayList<StatisticsRegion>();
+			ApiFuture<QuerySnapshot> statisticRef = FirestoreClient.getFirestore().collection("coivid19")
+					.document("statistique").collection("regions").get();
+			// future.get() blocks on response
+			List<QueryDocumentSnapshot> documents = statisticRef.get().getDocuments();
+			for (QueryDocumentSnapshot doc : documents) {
+				StatisticsRegion ss = doc.toObject(StatisticsRegion.class);
+				listeStatisticsRegion.add(new StatisticsRegion(ss.getNom(), ss.getTotalCases(), ss.getNewCases()));
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -61,6 +81,14 @@ public class Accueil {
 
 	public void initiaize() {
 
+	}
+
+	public ArrayList<StatisticsRegion> getListeStatisticsRegion() {
+		return listeStatisticsRegion;
+	}
+
+	public void setListeStatisticsRegion(ArrayList<StatisticsRegion> listeStatisticsRegion) {
+		this.listeStatisticsRegion = listeStatisticsRegion;
 	}
 
 	public int getNewRecovered() {
@@ -164,7 +192,11 @@ public class Accueil {
 			this.message = "badr";
 			return "Accueil";
 		}
+		message=null;
 		return "Accueil";
 	}
 
+	public String consulter() {
+			return "Reclamation";
+	}
 }
