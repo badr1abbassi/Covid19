@@ -16,6 +16,9 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 
+import metiers.Region;
+import metiers.Statistique;
+
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
@@ -35,8 +38,12 @@ public class Accueil {
 	private String message;
 	private String login;
 	private String mdp;
-	private ArrayList<StatisticsRegion> listeStatisticsRegion;
+	private Region regionForDetails;
+	private ArrayList<Region> listRegion = new ArrayList<Region>();;
 	private BarChartModel barModel;
+	private String tableauRegions[] = { "Fès-Meknès", "Oriental", "Guelmim-Oued Noun", "Souss-Massa", "Drâa-Tafilalet",
+			"Marrakech-Safi", "Casablanca-Settat", "Béni Mellal-Khénifra", "Tanger-Tétouan-Al Hoceïma",
+			"Rabat-Salé-Kénitra", "Dakhla-Oued Ed Dahab", "Laâyoune-Sakia El Hamra" };
 	public Accueil() {
 		// totalCase=11;newCase=1;TotalDeaths=0;newDeaths=0;totalRecovered=10;newRecovered=2;activeCases=0;totalTests=0;newTests=0;
 		createBarModel();
@@ -69,14 +76,24 @@ public class Accueil {
 			} else {
 				System.out.println("No such document!");
 			}
-			listeStatisticsRegion = new ArrayList<StatisticsRegion>();
-			ApiFuture<QuerySnapshot> statisticRef = FirestoreClient.getFirestore().collection("coivid19")
-					.document("statistique").collection("regions").get();
-			// future.get() blocks on response
-			List<QueryDocumentSnapshot> documents = statisticRef.get().getDocuments();
-			for (QueryDocumentSnapshot doc : documents) {
-				StatisticsRegion ss = doc.toObject(StatisticsRegion.class);
-				listeStatisticsRegion.add(new StatisticsRegion(ss.getNom(), ss.getTotalCases(), ss.getNewCases()));
+			for (int i = 0; i < 12; i++) {
+				System.out.println("region " + tableauRegions[i]);
+				Region region = new Region(tableauRegions[i]);
+				ApiFuture<QuerySnapshot> statisticRef = FirestoreClient.getFirestore().collection("national")
+						.document("nationalStatistique").collection("regions").document(tableauRegions[i])
+						.collection("statistiques").get();
+				List<QueryDocumentSnapshot> documents = statisticRef.get().getDocuments();
+
+				for (QueryDocumentSnapshot doc : documents) {
+					Statistique ss = doc.toObject(Statistique.class);
+					System.out.println(doc.getId() + " => " + doc.toObject(Statistique.class));
+					region.addStatistique(doc.toObject(Statistique.class));
+				}
+				region.setTotalCases(region.getTotalCases_());
+				region.setTotalDeaths(region.getTotalDeaths_());
+				region.setTotalRecovered(region.getTotalRecovered_());
+				region.setTotalTests(region.getTotalTests_());
+				listRegion.add(region);
 			}
 
 		} catch (Exception e) {
@@ -84,8 +101,16 @@ public class Accueil {
 		}
 	}
 
-	public void initiaize() {
+	public void details(Region r) {
+		regionForDetails=r;
+	}
 
+	public Region getRegionForDetails() {
+		return regionForDetails;
+	}
+
+	public void setRegionForDetails(Region regionForDetails) {
+		this.regionForDetails = regionForDetails;
 	}
 
 	public BarChartModel getBarModel() {
@@ -96,12 +121,22 @@ public class Accueil {
 		this.barModel = barModel;
 	}
 
-	public ArrayList<StatisticsRegion> getListeStatisticsRegion() {
-		return listeStatisticsRegion;
+
+
+	public ArrayList<Region> getListRegion() {
+		return listRegion;
 	}
 
-	public void setListeStatisticsRegion(ArrayList<StatisticsRegion> listeStatisticsRegion) {
-		this.listeStatisticsRegion = listeStatisticsRegion;
+	public void setListRegion(ArrayList<Region> listRegion) {
+		this.listRegion = listRegion;
+	}
+
+	public String[] getTableauRegions() {
+		return tableauRegions;
+	}
+
+	public void setTableauRegions(String[] tableauRegions) {
+		this.tableauRegions = tableauRegions;
 	}
 
 	public int getNewRecovered() {
@@ -203,7 +238,7 @@ public class Accueil {
 	public String action() {
 		if (login.equals("badr") && mdp.equals("badr")) {
 			this.message = "badr";
-			return "Accueil";
+			return "Admin";
 		}
 		message=null;
 		return "Accueil";

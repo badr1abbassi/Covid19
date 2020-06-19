@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>ApplicationStatus</title>
+</h:head>
+<h:body>
+
+
+	<h1>les statistiques des regions</h1>
+	<div class="row">
+		<h:form>
+			<h:dataTable value="#{checkStatistique.listRegion}" var="region"
+				style="margin-top:40px" reflow="true" paginator="true">
+				<h:column>
+					<!-- column header -->
+					<f:facet name="header">Nom</f:facet>
+					<!-- row record -->
+    				#{region.nom}
+    			</h:column>
+				<h:column>
+					<f:facet name="header">Total Cases</f:facet>
+    				#{region.totalCases}
+    			</h:column>
+				<h:column>
+					<f:facet name="header">Total Revovered</f:facet>
+    				#{region.totalRecovered}
+    			</h:column>
+				<h:column>
+					<f:facet name="header">Total Death</f:facet>
+    				#{region.totalDeaths}
+    			</h:column>
+				<h:column>
+					<f:facet name="header">Total Tests</f:facet>
+    				#{region.totalTests}
+    			</h:column>
+				<h:column>
+					<f:facet name="header">details</f:facet>
+					<h:commandButton icon="fa fa-reply-all"
+						actionListener="#{checkStatistique.details(region)}" />
+				</h:column>
+			</h:dataTable>
+		</h:form>
+	</div>
+	<div class="row">
+		<h:panelGroup
+			rendered="#{not empty checkStatistique.regionForDetails}">
+			<h1>
+				<h:outputLabel value="#{checkStatistique.regionForDetails.nom}" />
+			</h1>
+			<div class="row">
+				<div class="col-xl-3 col-md-6 mb-4">
+					<h:outputLabel value="totalCases" />
+					<h:outputLabel
+						value="#{checkStatistique.regionForDetails.totalCases}" />
+				</div>
+				<div class="col-xl-3 col-md-6 mb-4">
+					<h:outputLabel value="totalRecovered" />
+					<h:outputLabel
+						value="#{checkStatistique.regionForDetails.totalRecovered}" />
+				</div>
+				<div class="col-xl-3 col-md-6 mb-4">
+					<h:outputLabel value="total Deaths" />
+					<h:outputLabel
+						value="#{checkStatistique.regionForDetails.totalDeaths}" />
+				</div>
+				<div class="col-xl-3 col-md-6 mb-4">
+					<h:outputLabel value="totalTests" />
+					<h:outputLabel
+						value="#{checkStatistique.regionForDetails.totalTests}" />
+				</div>
+			</div>
+			<div class="row">
+				<h:dataTable
+					value="#{checkStatistique.regionForDetails.listStatistique}"
+					var="statistique" style="margin-top:40px" reflow="true"
+					paginator="true">
+					<h:column>
+						<!-- column header -->
+						<f:facet name="header">Date</f:facet>
+						<!-- row record -->
+    				#{statistique.date}
+    			</h:column>
+					<h:column>
+						<f:facet name="header">new Cases</f:facet>
+    				#{statistique.newCases}
+    			</h:column>
+
+					<h:column>
+						<f:facet name="header">new Deaths</f:facet>
+    				#{statistique.newDeaths}
+    			</h:column>
+					<h:column>
+						<f:facet name="header">new Recovered</f:facet>
+    				#{statistique.newRecovered}
+    			</h:column>
+					<h:column>
+						<f:facet name="header">new Tests</f:facet>
+    				#{statistique.tests}
+    			</h:column>
+				</h:dataTable>
+			</div>
+			<br />
+		</h:panelGroup>
+
+	</div>
+</h:body>
+</html>

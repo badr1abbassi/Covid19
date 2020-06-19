@@ -15,11 +15,11 @@
 </h:head>
 <h:body>
 	<h1>Covid-19</h1>
-<div class="row">
-<h:form>
-<h:commandLink value = "consulter" action = "#{accueil.consulter}" /> 
-</h:form>
-</div>
+	<div class="row">
+		<h:form>
+			<h:commandLink value="consulter" action="#{accueil.consulter}" />
+		</h:form>
+	</div>
 	<div class="row">
 		<div class="col-xl-3 col-md-6 mb-4">
 			<h:panelGroup rendered="#{not empty accueil.message}">
@@ -127,28 +127,103 @@
 			</div>
 		</div>
 	</div>
+		<div class="row">
+		<p:chart type="bar" model="#{accueil.barModel}" />
+	</div>
+	<br/><br/>
 	<h1>les statistiques des regions</h1>
 	<div class="row">
-		<h:dataTable value="#{accueil.listeStatisticsRegion}" var="region" style="margin-top:40px" reflow="true"  paginator="true">
-			<h:column>
-				<!-- column header -->
-				<f:facet name="header">Nom</f:facet>
-				<!-- row record -->
+		<h:form>
+			<h:dataTable value="#{accueil.listRegion}" var="region"
+				style="margin-top:40px" reflow="true" paginator="true">
+				<h:column>
+					<!-- column header -->
+					<f:facet name="header">Nom</f:facet>
+					<!-- row record -->
     				#{region.nom}
     			</h:column>
-			<h:column>
-				<f:facet name="header">Total Cases</f:facet>
+				<h:column>
+					<f:facet name="header">Total Cases</f:facet>
     				#{region.totalCases}
     			</h:column>
-
-			<h:column>
-				<f:facet name="header">New Cases</f:facet>
-    				#{region.newCases}
+				<h:column>
+					<f:facet name="header">Total Revovered</f:facet>
+    				#{region.totalRecovered}
     			</h:column>
-		</h:dataTable>
+				<h:column>
+					<f:facet name="header">Total Death</f:facet>
+    				#{region.totalDeaths}
+    			</h:column>
+				<h:column>
+					<f:facet name="header">Total Tests</f:facet>
+    				#{region.totalTests}
+    			</h:column>
+				<h:column>
+					<f:facet name="header">details</f:facet>
+					<h:commandButton icon="fa fa-reply-all"
+						actionListener="#{accueil.details(region)}" />
+				</h:column>
+			</h:dataTable>
+		</h:form>
 	</div>
-	<div class="row"> 
-		<p:chart type="bar" model="#{accueil.barModel}"/>
+	<div class="row">
+		<h:panelGroup rendered="#{not empty accueil.regionForDetails}">
+			<h1>
+				<h:outputLabel value="#{accueil.regionForDetails.nom}" />
+			</h1>
+			<br/><br/>
+			<div class="row">
+				<div class="col-xl-3 col-md-6 mb-4">
+					<h:outputLabel value="totalCases" />
+					<h:outputLabel value="#{accueil.regionForDetails.totalCases}" />
+				</div>
+				<div class="col-xl-3 col-md-6 mb-4">
+					<h:outputLabel value="totalRecovered" />
+					<h:outputLabel value="#{accueil.regionForDetails.totalRecovered}" />
+				</div>
+				<div class="col-xl-3 col-md-6 mb-4">
+					<h:outputLabel value="total Deaths" />
+					<h:outputLabel value="#{accueil.regionForDetails.totalDeaths}" />
+				</div>
+				<div class="col-xl-3 col-md-6 mb-4">
+					<h:outputLabel value="totalTests" />
+					<h:outputLabel value="#{accueil.regionForDetails.totalTests}" />
+				</div>
+			</div>
+			<br/><br/>
+			<div class="row">
+				<h:dataTable value="#{accueil.regionForDetails.listStatistique}"
+					var="statistique" style="margin-top:40px" reflow="true"
+					paginator="true">
+					<h:column>
+						<!-- column header -->
+						<f:facet name="header">Date</f:facet>
+						<!-- row record -->
+    				#{statistique.date}
+    			</h:column>
+					<h:column>
+						<f:facet name="header">new Cases</f:facet>
+    				#{statistique.newCases}
+    			</h:column>
+
+					<h:column>
+						<f:facet name="header">new Deaths</f:facet>
+    				#{statistique.newDeaths}
+    			</h:column>
+					<h:column>
+						<f:facet name="header">new Recovered</f:facet>
+    				#{statistique.newRecovered}
+    			</h:column>
+					<h:column>
+						<f:facet name="header">new Tests</f:facet>
+    				#{statistique.tests}
+    			</h:column>
+				</h:dataTable>
+			</div>
+			<br />
+		</h:panelGroup>
+
 	</div>
+
 </h:body>
 </html>
