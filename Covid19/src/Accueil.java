@@ -45,7 +45,6 @@ public class Accueil {
 			"Marrakech-Safi", "Casablanca-Settat", "Béni Mellal-Khénifra", "Tanger-Tétouan-Al Hoceïma",
 			"Rabat-Salé-Kénitra", "Dakhla-Oued Ed Dahab", "Laâyoune-Sakia El Hamra" };
 	public Accueil() {
-		// totalCase=11;newCase=1;TotalDeaths=0;newDeaths=0;totalRecovered=10;newRecovered=2;activeCases=0;totalTests=0;newTests=0;
 		createBarModel();
 		try {
 			FileInputStream serviceAccount = new FileInputStream(

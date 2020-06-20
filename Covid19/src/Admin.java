@@ -22,8 +22,7 @@ public class Admin {
 	                return "CheckStatistique"; 
 	                
 	            case "checkReclamations": 
-	                System.out.println("liste des reclamations"); 
-	                break; 
+	                return "ListeReclaramation";
 	            default: 
 	                System.out.println("no match"); 
 	        }
