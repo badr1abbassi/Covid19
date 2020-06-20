@@ -131,7 +131,7 @@ public class Reclamation {
 	public void insertreclamation() {
 		try {
 			FileInputStream serviceAccount = new FileInputStream(
-					"C:/Users/badre/git/Covid19/Covid19/serviceAccount.json");
+					"C:/Users/XPS/git/Covid19/Covid19/serviceAccount.json");
 			FirebaseOptions options = new FirebaseOptions.Builder()
 					.setCredentials(GoogleCredentials.fromStream(serviceAccount))
 					.setDatabaseUrl("https://covid19-10abd.firebaseio.com").build();

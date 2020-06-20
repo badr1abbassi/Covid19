@@ -5,28 +5,41 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
 	<title>ApplicationStatus</title>
+	<link href="css/style.css" rel="stylesheet" />
+	<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+	<link href="css/sb-admin-2.min.css" rel="stylesheet" />
 </h:head>
-<h:body>
-	<h:form>
-		<h1>add statistique</h1>
-		<div class="row">
-			<h:commandButton value="add statistique"
-				action="#{admin.action}">
-				<f:param name="action" value="addStatistique" />
-			</h:commandButton>
-		</div>
-		<div class="row">
-			<h:commandButton value="Visualiser les statistique"
-				action="#{admin.action}">
-				<f:param name="action" value="checkStatistique" />
-			</h:commandButton>
-		</div>
-		<div class="row">
-			<h:commandButton value="voir les reclamations"
-				action="#{admin.action}">
-				<f:param name="action" value="checkReclamations" />
-			</h:commandButton>
-		</div>
-	</h:form>
+<h:body class="body">
+	<div class="container">
+		<h1 class="container-body">Admin</h1>
+		 
+		<h:form class='container-body'>
+			<div class="container-header container-img-header">
+            <div class="overlay"></div>
+           <h:commandButton  class="text-header" value="Ajouter les données"
+					action="#{admin.action}">
+					<f:param name="action" value="addStatistique" />
+				</h:commandButton>
+         
+        </div> 
+        <div class="container-header container-img-header">
+            <div class="overlay"></div>
+           <h:commandButton  class="text-header" value="Visualiser les statistiques"
+					action="#{admin.action}">
+					<f:param name="action" value="checkStatistique" />
+				</h:commandButton>
+         
+        </div> 
+        <div class="container-header container-img-header">
+            <div class="overlay"></div>
+           <h:commandButton  class="text-header"  value="Voir les reclamations"
+					action="#{admin.action}">
+					<f:param name="action" value="checkReclamations" />
+				</h:commandButton>
+         
+        </div> 
+			
+		</h:form>
+	</div>
 </h:body>
 </html>

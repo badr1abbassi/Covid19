@@ -1,229 +1,319 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Accueil</title>
 	<!-- Custom fonts for this template-->
-	<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
-		type="text/css" />
+	<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
 
 
 	<!-- Custom styles for this template-->
 	<link href="css/sb-admin-2.min.css" rel="stylesheet" />
+	<link href="css/style.css" rel="stylesheet" />
 </h:head>
-<h:body>
-	<h1>Covid-19</h1>
-	<div class="row">
-		<h:form>
-			<h:commandLink value="consulter" action="#{accueil.consulter}" />
-		</h:form>
-	</div>
-	<div class="row">
-		<div class="col-xl-3 col-md-6 mb-4">
-			<h:panelGroup rendered="#{not empty accueil.message}">
-				<h:outputLabel value="Bonjour " />
-				<h:outputLabel value="#{accueil.message}" />
-				<br />
-			</h:panelGroup>
+<h:body class='body'>
+	<nav class="nav-index">
+		<h1>Covid-19</h1>
+		<div class="buttons-inline">
+			<div class="consulter">
+				<h:form>
+					<h:commandLink value="Consulter" action="#{accueil.consulter}" />
+				</h:form>
+			</div>
+			<h:commandButton id="admin" class="btn btn-success" value="Admin" />
+			
 		</div>
-	</div>
-	<div class="row">
-		<div class="col-xl-12 col-md-6 mb-4">
-			<h:form rendered="#{empty accueil.message}">
-				<label>Login:</label>
-				<h:inputText value="#{accueil.login}" />
-				<label>mdp: </label>
-				<h:inputText value="#{accueil.mdp}" />
-				<h:commandButton value="Login" action="#{accueil.action}" />
+	</nav>
+	<div class="bg-modal" id="modal">
+            <div class="modal-content">
+                <div class="close" id="close">+</div>
+              
+
+                <div class="container-body">
+                    <h:form class="form-user" rendered="#{empty accueil.message}">
+                    <h1>Covid-19</h1>
+                    <div>
+						<label>
+                            <span>Identifiant</span>
+                            <h:inputText class='login-input' value="#{accueil.login}" />
+                        </label>
+						</div>
+						<div>
+						<label>
+                            <span>Mot de passe</span>
+                            <h:inputText class='login-input' value="#{accueil.mdp}" />
+                        </label>
+						</div>
+						<h:commandButton class="btn btn-success" value="Login" action="#{accueil.action}" />
+					
 			</h:form>
+                    
+                </div>
+            </div>
+        </div>
+
+	<div class="container">
+		<!-- 
+		<div class="container-body">
+			<div class="col-xl-3 col-md-6 mb-4">
+				<h:panelGroup rendered="#{not empty accueil.message}">
+					<h:outputLabel value="Bonjour " />
+					<h:outputLabel value="#{accueil.message}" />
+				</h:panelGroup>
+			</div>
 		</div>
-	</div>
+ -->
 
-	<div class="row">
-		<!-- Earnings (Monthly) Card Example -->
-		<div class="col-xl-3 col-md-6 mb-4">
-			<div class="card border-left-warning shadow h-100 py-2">
-				<div class="card-body">
-					<div class="row no-gutters align-items-center">
-						<div class="col mr-2">
-							<div
-								class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total
-								Cases</div>
-							<div class="h5 mb-0 font-weight-bold text-gray-800">
-								<h:outputLabel value="#{accueil.totalCase}" />
+		<div class="columns container-body">
+			<!-- Earnings (Monthly) Card Example -->
+			<div class="col">
+				<div class="card border-left-warning shadow h-100 py-2">
+					<div class="card-body">
+						<div class="row no-gutters align-items-center">
+							<div class="col mr-2">
+								<div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total
+									Cases
+								</div>
+								<div class="row no-gutters align-items-center">
+									<div class="col-auto">
+										<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+											<h:outputLabel value="#{accueil.totalCase}" />
+										</div>
+									</div>
+
+								</div>
 							</div>
-						</div>
-						<div class="col-auto">
-							<i class="fas fa-bell fa-2x" style="color: yellow;"></i>
-						</div>
+							<div class="col-auto">
+								<i class="fas fa-bell fa-2x text-warning"></i>
+							</div>
 
-					</div>
-					<div class="col">
-						<div class="h5 mb-0 font-weight-bold " style="color: yellow;">
+						</div>
+						<div class="h5 mb-0 font-weight-bold text-warning">
 							<h:outputLabel value="#{accueil.newCase}" />
 						</div>
 					</div>
 				</div>
 			</div>
+
+			<!-- Earnings (Monthly) Card Example -->
+			<div class="col">
+				<div class="card border-left-danger shadow h-100 py-2">
+					<div class="card-body">
+						<div class="row no-gutters align-items-center">
+							<div class="col mr-2">
+								<div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+									Total Deaths
+								</div>
+								<div class="row no-gutters align-items-center">
+									<div class="col-auto">
+										<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+											<h:outputLabel value="#{accueil.totalDeaths}" />
+											<br />
+										</div>
+									</div>
+
+								</div>
+							</div>
+							<div class="col-auto">
+								<i class="fas fa-times fa-2x text-danger"></i>
+							</div>
+						</div>
+						<div class="col">
+							<div class="h5 mb-0 font-weight-bold text-danger">
+								<h:outputLabel value="#{accueil.newDeaths}" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Pending Requests Card Example -->
+			<div class="col">
+				<div class="card border-left-success shadow h-100 py-2">
+					<div class="card-body">
+						<div class="row no-gutters align-items-center">
+							<div class="col mr-2">
+								<div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total
+									Recovered</div>
+								<div class="row no-gutters align-items-center">
+									<div class="col-auto">
+										<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+											<h:outputLabel value="#{accueil.totalRecovered}" />
+										</div>
+									</div>
+
+								</div>
+							</div>
+							<div class="col-auto">
+								<i class="fas fa-heart fa-2x text-success"></i>
+							</div>
+						</div>
+						<div class="col">
+							<div class="h5 mb-0 font-weight-bold text-success">
+								<h:outputLabel value="#{accueil.newRecovered}" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container-body">
+			<p:chart type="bar" model="#{accueil.barModel}" />
 		</div>
 
-		<!-- Earnings (Monthly) Card Example -->
-		<div class="col-xl-3 col-md-6 mb-4">
-			<div class="card border-left-danger shadow h-100 py-2">
-				<div class="card-body">
-					<div class="row no-gutters align-items-center">
-						<div class="col mr-2">
-							<div
-								class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-								Total Deaths</div>
-							<div class="row no-gutters align-items-center">
-								<div class="col-auto">
-									<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-										<h:outputLabel value="#{accueil.totalDeaths}" />
-										<br />
+		<div class="container-body">
+			<h1>Les statistiques des regions</h1>
+			<h:form class='table'>
+				<h:dataTable class="table table-sortable table-striped table-bordered table-sm"
+					value="#{accueil.listRegion}" var="region" reflow="true" paginator="true">
+					<h:column class="tab-col">
+						<!-- column header -->
+						<f:facet name="header">Nom</f:facet>
+						<!-- row record -->
+						#{region.nom}
+					</h:column>
+					<h:column>
+						<f:facet name="header">Total Cases</f:facet>
+						#{region.totalCases}
+					</h:column>
+					<h:column>
+						<f:facet name="header">Total Revovered</f:facet>
+						#{region.totalRecovered}
+					</h:column>
+					<h:column>
+						<f:facet name="header">Total Death</f:facet>
+						#{region.totalDeaths}
+					</h:column>
+					<h:column>
+						<f:facet name="header">Total Tests</f:facet>
+						#{region.totalTests}
+					</h:column>
+					<h:column>
+						<h:commandButton value="Détails" action="#{accueil.details(region)}" />
+					</h:column>
+				</h:dataTable>
+			</h:form>
+		</div>
+
+		<div class="container-body">
+			<h:panelGroup rendered="#{not empty accueil.regionForDetails}">
+				<h1>
+					<h:outputLabel value="#{accueil.regionForDetails.nom}" />
+				</h1>
+				<div class="row table">
+					<div class="col">
+						<div class="card border-left-warning shadow h-100 py-2">
+							<div class="card-body">
+								<div class="row no-gutters align-items-center">
+									<div class="col mr-2">
+										<div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total
+											Cases
+										</div>
+										<div class="row no-gutters align-items-center">
+											<div class="col-auto">
+												<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+													<h:outputLabel value="#{accueil.regionForDetails.totalCases}" />
+												</div>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-auto">
+										<i class="fas fa-bell fa-2x text-warning"></i>
+									</div>
+
+								</div>
+
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="card border-left-danger shadow h-100 py-2">
+							<div class="card-body">
+								<div class="row no-gutters align-items-center">
+									<div class="col mr-2">
+										<div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+											Total Deaths
+										</div>
+										<div class="row no-gutters align-items-center">
+											<div class="col-auto">
+												<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+													<h:outputLabel value="#{accueil.regionForDetails.totalDeaths}" />
+												</div>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-auto">
+										<i class="fas fa-times fa-2x text-danger"></i>
 									</div>
 								</div>
 
 							</div>
 						</div>
-						<div class="col-auto">
-							<i class="fas fa-times fa-2x" style="color: red;"></i>
-						</div>
 					</div>
 					<div class="col">
-						<div class="h5 mb-0 font-weight-bold " style="color: red;">
-							<h:outputLabel value="#{accueil.newDeaths}" />
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+						<div class="card border-left-success shadow h-100 py-2">
+							<div class="card-body">
+								<div class="row no-gutters align-items-center">
+									<div class="col mr-2">
+										<div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total
+											Recovered</div>
+										<div class="row no-gutters align-items-center">
+											<div class="col-auto">
+												<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+													<h:outputLabel value="#{accueil.regionForDetails.totalRecovered}" />
+												</div>
+											</div>
 
-		<!-- Pending Requests Card Example -->
-		<div class="col-xl-3 col-md-6 mb-4">
-			<div class="card border-left-success shadow h-100 py-2">
-				<div class="card-body">
-					<div class="row no-gutters align-items-center">
-						<div class="col mr-2">
-							<div
-								class="text-xs font-weight-bold text-success text-uppercase mb-1">Total
-								Recovered</div>
-							<div class="h5 mb-0 font-weight-bold text-gray-800">
-								<h:outputLabel value="#{accueil.totalRecovered}" />
+										</div>
+									</div>
+									<div class="col-auto">
+										<i class="fas fa-heart fa-2x text-success"></i>
+									</div>
+								</div>
 							</div>
 						</div>
-						<div class="col-auto">
-							<i class="fas fa-heart fa-2x" style="color: green;"></i>
-						</div>
 					</div>
-					<div class="col">
-						<div class="h5 mb-0 font-weight-bold " style="color: green;">
-							<h:outputLabel value="#{accueil.newRecovered}" />
-						</div>
-					</div>
+
+
 				</div>
-			</div>
+
+				<div class="row table">
+					<h:dataTable class="table table-sortable table-striped table-bordered table-sm"
+						value="#{accueil.regionForDetails.listStatistique}" var="statistique" style="margin-top:40px"
+						reflow="true" paginator="true">
+						<h:column>
+							<!-- column header -->
+							<f:facet name="header">Date</f:facet>
+							<!-- row record -->
+							#{statistique.date}
+						</h:column>
+						<h:column>
+							<f:facet name="header">new Cases</f:facet>
+							#{statistique.newCases}
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">new Deaths</f:facet>
+							#{statistique.newDeaths}
+						</h:column>
+						<h:column>
+							<f:facet name="header">new Recovered</f:facet>
+							#{statistique.newRecovered}
+						</h:column>
+						<h:column>
+							<f:facet name="header">Nouveaux testes</f:facet>
+							#{statistique.tests}
+						</h:column>
+					</h:dataTable>
+				</div>
+			</h:panelGroup>
+
 		</div>
 	</div>
-		<div class="row">
-		<p:chart type="bar" model="#{accueil.barModel}" />
-	</div>
-	<br/><br/>
-	<h1>les statistiques des regions</h1>
-	<div class="row">
-		<h:form>
-			<h:dataTable value="#{accueil.listRegion}" var="region"
-				style="margin-top:40px" reflow="true" paginator="true">
-				<h:column>
-					<!-- column header -->
-					<f:facet name="header">Nom</f:facet>
-					<!-- row record -->
-    				#{region.nom}
-    			</h:column>
-				<h:column>
-					<f:facet name="header">Total Cases</f:facet>
-    				#{region.totalCases}
-    			</h:column>
-				<h:column>
-					<f:facet name="header">Total Revovered</f:facet>
-    				#{region.totalRecovered}
-    			</h:column>
-				<h:column>
-					<f:facet name="header">Total Death</f:facet>
-    				#{region.totalDeaths}
-    			</h:column>
-				<h:column>
-					<f:facet name="header">Total Tests</f:facet>
-    				#{region.totalTests}
-    			</h:column>
-				<h:column>
-					<f:facet name="header">details</f:facet>
-					<h:commandButton icon="fa fa-reply-all"
-						actionListener="#{accueil.details(region)}" />
-				</h:column>
-			</h:dataTable>
-		</h:form>
-	</div>
-	<div class="row">
-		<h:panelGroup rendered="#{not empty accueil.regionForDetails}">
-			<h1>
-				<h:outputLabel value="#{accueil.regionForDetails.nom}" />
-			</h1>
-			<br/><br/>
-			<div class="row">
-				<div class="col-xl-3 col-md-6 mb-4">
-					<h:outputLabel value="totalCases" />
-					<h:outputLabel value="#{accueil.regionForDetails.totalCases}" />
-				</div>
-				<div class="col-xl-3 col-md-6 mb-4">
-					<h:outputLabel value="totalRecovered" />
-					<h:outputLabel value="#{accueil.regionForDetails.totalRecovered}" />
-				</div>
-				<div class="col-xl-3 col-md-6 mb-4">
-					<h:outputLabel value="total Deaths" />
-					<h:outputLabel value="#{accueil.regionForDetails.totalDeaths}" />
-				</div>
-				<div class="col-xl-3 col-md-6 mb-4">
-					<h:outputLabel value="totalTests" />
-					<h:outputLabel value="#{accueil.regionForDetails.totalTests}" />
-				</div>
-			</div>
-			<br/><br/>
-			<div class="row">
-				<h:dataTable value="#{accueil.regionForDetails.listStatistique}"
-					var="statistique" style="margin-top:40px" reflow="true"
-					paginator="true">
-					<h:column>
-						<!-- column header -->
-						<f:facet name="header">Date</f:facet>
-						<!-- row record -->
-    				#{statistique.date}
-    			</h:column>
-					<h:column>
-						<f:facet name="header">new Cases</f:facet>
-    				#{statistique.newCases}
-    			</h:column>
-
-					<h:column>
-						<f:facet name="header">new Deaths</f:facet>
-    				#{statistique.newDeaths}
-    			</h:column>
-					<h:column>
-						<f:facet name="header">new Recovered</f:facet>
-    				#{statistique.newRecovered}
-    			</h:column>
-					<h:column>
-						<f:facet name="header">new Tests</f:facet>
-    				#{statistique.tests}
-    			</h:column>
-				</h:dataTable>
-			</div>
-			<br />
-		</h:panelGroup>
-
-	</div>
-
+	<script src="js/sortedTable.js"></script>
+	<script src="js/pop-up.js"></script>
 </h:body>
+
 </html>
