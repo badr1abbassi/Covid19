@@ -36,17 +36,12 @@
 		</h:form>
 	</div>
 	<div class="row">
-	<h:form rendered="#{not empty gestionReclamations.detailsReclamation }">
-	
+		
+			<h:panelGroup
+				rendered="#{not empty gestionReclamations.detailsReclamation}">
 				<h1>details consultation</h1>
 				<div class="row">
-					<label>reclamation : </label>
-
-					<h:outputLabel var="id"
-						value="#{gestionReclamations.detailsReclamation.ID}" />
-				</div>
-				<div class="row">
-					<label>votre numero de tel:</label>
+					<label>votre numero de tel: --> </label>
 
 					<h:outputLabel
 						value="#{gestionReclamations.detailsReclamation.numeroTel}" />
@@ -92,20 +87,19 @@
 					<h:outputLabel
 						value="#{gestionReclamations.detailsReclamation.details}" />
 				</div>
-				
+				<h:form>
 				<div class="row">
 					<label>votre decision:</label>
 					<h:inputTextarea value="#{gestionReclamations.reponse}" cols="30"
 						rows="10" />
 				</div>
 				<div class="row">
-					<h:commandButton value="voir les reclamations"
-				action="#{gestionReclamations.myAction}" process="@this" ajax="false">
-				<f:param name="id" value="#{gestionReclamations.detailsReclamation.ID}" />
-			</h:commandButton>
+					    <h:commandButton actionListener="#{gestionReclamations.go}"/>
+					
 				</div>
 				</h:form>
 				
+			</h:panelGroup>
 		
 	</div>
 </h:body>

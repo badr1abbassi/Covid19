@@ -47,7 +47,6 @@ public class CheckStatistique {
 
 				for (QueryDocumentSnapshot doc : documents) {
 					Statistique ss = doc.toObject(Statistique.class);
-					System.out.println(doc.getId() + " => " + doc.toObject(Statistique.class));
 					region.addStatistique(doc.toObject(Statistique.class));
 				}
 				region.setTotalCases(region.getTotalCases_());

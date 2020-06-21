@@ -69,7 +69,7 @@ public class Accueil {
 				newDeaths = Math.toIntExact((Long) document.get("newDeaths"));
 				newTests = Math.toIntExact((Long) document.get("newTests"));
 				totalRecovered = Math.toIntExact((Long) document.get("totalRecovered"));
-				TotalDeaths = Math.toIntExact((Long) document.get("TotalDeaths"));
+				TotalDeaths = Math.toIntExact((Long) document.get("totalDeaths"));
 				activeCases = Math.toIntExact((Long) document.get("activeCases"));
 				totalTests = Math.toIntExact((Long) document.get("totalTests"));
 			} else {
@@ -85,7 +85,6 @@ public class Accueil {
 
 				for (QueryDocumentSnapshot doc : documents) {
 					Statistique ss = doc.toObject(Statistique.class);
-					System.out.println(doc.getId() + " => " + doc.toObject(Statistique.class));
 					region.addStatistique(doc.toObject(Statistique.class));
 				}
 				region.setTotalCases(region.getTotalCases_());

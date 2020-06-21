@@ -7,22 +7,94 @@
 	<title>ApplicationStatus</title>
 </h:head>
 <h:body>
+<div class="row">
+<h:form>
+<H1>consulter ta gestionReclamationUser</H1>
+<label>votre numero de tel:</label>
+<h:inputText value="#{gestionReclamationUser.numeroTel}" />
+<h:commandButton value="Login" action="#{gestionReclamationUser.myAction}" />
+</h:form>
+</div>
+<div class="row">
+	<h:panelGroup rendered="#{not empty gestionReclamationUser.detailsReclamation }">
+				<h1>details consultation</h1>
+				<div class="row">
+					<label>reclamation : </label>
+
+					<h:outputLabel var="id"
+						value="#{gestionReclamationUser.detailsReclamation.ID}" />
+				</div>
+				<div class="row">
+					<label>votre numero de tel:</label>
+
+					<h:outputLabel
+						value="#{gestionReclamationUser.detailsReclamation.numeroTel}" />
+				</div>
+				<div class="row">
+					<label>region:</label>
+					<h:outputLabel
+						value="#{gestionReclamationUser.detailsReclamation.region}" />
+
+				</div>
+				<div class="row">
+					<label>degree de toux:</label>
+					<h:outputLabel
+						value="#{gestionReclamationUser.detailsReclamation.toux}" />
+				</div>
+				<div class="row">
+					<label>degree de fievre:</label>
+					<h:outputLabel
+						value="#{gestionReclamationUser.detailsReclamation.fievre}" />
+
+				</div>
+				<div class="row">
+					<label>degree de respiration:</label>
+					<h:outputLabel
+						value="#{gestionReclamationUser.detailsReclamation.diffRespiratoire}" />
+
+				</div>
+				<div class="row">
+					<label>fatigue:</label>
+					<h:outputLabel
+						value="#{gestionReclamationUser.detailsReclamation.fatigue}" />
+
+				</div>
+
+				<div class="row">
+					<label>vous avez un pneumonie:</label>
+					<h:outputLabel
+						value="#{gestionReclamationUser.detailsReclamation.pneumonie}" />
+
+				</div>
+				<div class="row">
+					<label>plus de details:</label>
+					<h:outputLabel
+						value="#{gestionReclamationUser.detailsReclamation.details}" />
+				</div>
+				
+				<div class="row">
+					<label>La decision de notre docteur:</label>
+					<h:outputLabel value="#{gestionReclamationUser.detailsReclamation.reponse}" />
+				</div>
+			</h:panelGroup>
+				
+</div>
 	<h:form>
 		<h1>Consulter notre docteur</h1>
 		<div class="row">
 			<label>votre numero de tel:</label>
-			<h:inputText value="#{reclamation.numeroTel}" />
+			<h:inputText value="#{gestionReclamationUser.reclamation.numeroTel}" />
 		</div>
 		<div class="row">
 			<label>region:</label>
-	 	<h:selectOneMenu id="region" value="#{reclamation.region}" effect="fold" editable="true">
+	 	<h:selectOneMenu id="region" value="#{gestionReclamationUser.reclamation.region}" effect="fold" editable="true">
             <f:selectItem itemLabel="Select One" itemValue="" />
-            <f:selectItems value="#{reclamation.listeRegions}" />
+            <f:selectItems value="#{gestionReclamationUser.listeRegions}" />
         </h:selectOneMenu>
 		</div>
 		<div class="row">
 			<label>degree de toux:</label>
-			<h:selectOneRadio value="#{reclamation.toux}">
+			<h:selectOneRadio value="#{gestionReclamationUser.reclamation.toux}">
 				<f:selectItem itemValue="faible" itemLabel="faible" />
 				<f:selectItem itemValue="moyen" itemLabel="moyen" />
 				<f:selectItem itemValue="grave" itemLabel="grave" />
@@ -30,7 +102,7 @@
 		</div>
 		<div class="row">
 			<label>degree de fievre:</label>
-			<h:selectOneRadio value="#{reclamation.fievre}">
+			<h:selectOneRadio value="#{gestionReclamationUser.reclamation.fievre}">
 				<f:selectItem itemValue="faible" itemLabel="faible" />
 				<f:selectItem itemValue="moyen" itemLabel="moyen" />
 				<f:selectItem itemValue="grave" itemLabel="grave" />
@@ -38,7 +110,7 @@
 		</div>
 		<div class="row">
 			<label>degree de respiration:</label>
-			<h:selectOneRadio value="#{reclamation.diffRespiratoire}">
+			<h:selectOneRadio value="#{gestionReclamationUser.reclamation.diffRespiratoire}">
 				<f:selectItem itemValue="faible" itemLabel="faible" />
 				<f:selectItem itemValue="moyen" itemLabel="moyen" />
 				<f:selectItem itemValue="grave" itemLabel="grave" />
@@ -46,7 +118,7 @@
 		</div>
 		<div class="row">
 			<label>fatigue:</label>
-			<h:selectOneRadio value="#{reclamation.fatigue}">
+			<h:selectOneRadio value="#{gestionReclamationUser.reclamation.fatigue}">
 				<f:selectItem itemValue="oui" itemLabel="oui" />
 				<f:selectItem itemValue="non" itemLabel="non" />
 			</h:selectOneRadio>
@@ -54,7 +126,7 @@
 
 		<div class="row">
 			<label>vous avez un pneumonie:</label>
-			<h:selectOneRadio value="#{reclamation.pneumonie}">
+			<h:selectOneRadio value="#{gestionReclamationUser.reclamation.pneumonie}">
 				<f:selectItem itemValue="oui" itemLabel="oui" />
 				<f:selectItem itemValue="non" itemLabel="non" />
 				<f:selectItem itemValue="aucune idee" itemLabel="aucune idee" />
@@ -62,9 +134,9 @@
 		</div>
 		<div class="row">
 			<label>plus de details:</label>
-			<h:inputTextarea value="#{reclamation.details}" cols="30" rows="10" />
+			<h:inputTextarea value="#{gestionReclamationUser.reclamation.details}" cols="30" rows="10" />
 		</div>
-		<h:commandButton value="Login" action="#{reclamation.action}">
+		<h:commandButton value="Login" action="#{gestionReclamationUser.action}">
 		</h:commandButton>
 	</h:form>
 </h:body>

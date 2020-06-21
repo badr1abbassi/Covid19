@@ -1,8 +1,11 @@
 import java.io.FileInputStream;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 
 import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
@@ -14,6 +17,7 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 
+import metiers.Reclamation;
 import metiers.Region;
 import metiers.Statistique;
 
@@ -23,17 +27,13 @@ public class GestionReclamations {
 	Vector<Reclamation> listReclamations;
 	private Reclamation detailsReclamation;
 	private String reponse;
+	private String idReclamation;
 	
 	public GestionReclamations() {
 		listReclamations=new Vector<Reclamation>();
 		initReclamation();
 	}
-	public String getReponse() {
-		return reponse;
-	}
-	public void setReponse(String reponse) {
-		this.reponse = reponse;
-	}
+
 	public void initReclamation() {
 		try {
 			FileInputStream serviceAccount = new FileInputStream(
@@ -50,8 +50,10 @@ public class GestionReclamations {
 
 				for (QueryDocumentSnapshot doc : documents) {
 					Reclamation reclamation=doc.toObject(Reclamation.class);
+					if(reclamation.getStatus()!=1) {
 					reclamation.setID(doc.getId());
 					listReclamations.add(reclamation);
+					}
 				}
 			
 		} catch (Exception e) {
@@ -59,15 +61,18 @@ public class GestionReclamations {
 		}
 	}
 
-	public String action(Reclamation r) {
+	public void action(Reclamation r) {
 			detailsReclamation=r;
-			System.out.println("-------------------> "+detailsReclamation.getNumeroTel());
-			return "DetailsReclamation";
+			idReclamation=r.getID();
+			
 	}
-	public String go() {
-		//System.out.println("-------------------> "+detailsReclamation.getID());
+	public String myAction() {
+		FacesContext fc = FacesContext.getCurrentInstance();
+	      Map<String,String> params = 
+	         fc.getExternalContext().getRequestParameterMap();
+	      idReclamation =  params.get("id");
 		try {
-		DocumentReference docRef = FirestoreClient.getFirestore().collection("reclamations").document(detailsReclamation.getID());
+		DocumentReference docRef = FirestoreClient.getFirestore().collection("reclamations").document(idReclamation);
 		ApiFuture<WriteResult> future = docRef.update("reponse", reponse);
 		WriteResult result = future.get();
 		System.out.println("Write result: " + result);
@@ -77,25 +82,36 @@ public class GestionReclamations {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "ListeReclaramation";
+		return "Admin";
 	
 	}
+	
 	public Reclamation getDetailsReclamation() {
 		return detailsReclamation;
 	}
 	public void setDetailsReclamation(Reclamation detailsReclamation) {
 		this.detailsReclamation = detailsReclamation;
 	}
-	public String details(Reclamation r) {
-		detailsReclamation=r;
-		return "detailsReclamation";
-	}
+
 	public Vector<Reclamation> getListReclamations() {
 		return listReclamations;
 	}
 	public void setListReclamations(Vector<Reclamation> listReclamations) {
 		this.listReclamations = listReclamations;
 	}
-	
+	public String getReponse() {
+		return reponse;
+	}
+	public void setReponse(String reponse) {
+		this.reponse = reponse;
+	}
 
+	public String getIdReclamation() {
+		return idReclamation;
+	}
+
+	public void setIdReclamation(String idReclamation) {
+		this.idReclamation = idReclamation;
+	}	
+	
 }
