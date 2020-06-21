@@ -26,6 +26,7 @@ public class GestionReclamationUser {
 	private Reclamation reclamation=new Reclamation();
 	private String numeroTel;
 	private Reclamation detailsReclamation;
+	private String messageErr=new String("");
 	// pas encore traité
 	private HashMap<String, String> listeRegions;
 	public GestionReclamationUser() {
@@ -58,7 +59,7 @@ public class GestionReclamationUser {
 	public void insertreclamation() {
 		try {
 			FileInputStream serviceAccount = new FileInputStream(
-					"C:/Users/badre/git/Covid19/Covid19/serviceAccount.json");
+					"C:/Users/XPS/git/Covid19/Covid19/serviceAccount.json");
 			FirebaseOptions options = new FirebaseOptions.Builder()
 					.setCredentials(GoogleCredentials.fromStream(serviceAccount))
 					.setDatabaseUrl("https://covid19-10abd.firebaseio.com").build();
@@ -77,7 +78,7 @@ public class GestionReclamationUser {
 	public void myAction() {
 		try {
 			FileInputStream serviceAccount = new FileInputStream(
-					"C:/Users/badre/git/Covid19/Covid19/serviceAccount.json");
+					"C:/Users/XPS/git/Covid19/Covid19/serviceAccount.json");
 			FirebaseOptions options = new FirebaseOptions.Builder()
 					.setCredentials(GoogleCredentials.fromStream(serviceAccount))
 					.setDatabaseUrl("https://covid19-10abd.firebaseio.com").build();
@@ -90,6 +91,7 @@ public class GestionReclamationUser {
 			// future.get() blocks on response
 			List<QueryDocumentSnapshot> documents = future.get().getDocuments();
 			if (documents.size() == 0) {
+				messageErr=new String("vous n'avez aucune reclamation");
 				System.out.println("vous n'avez aucune reclamation");
 			} else {
 				for (DocumentSnapshot document : documents) {
@@ -138,6 +140,18 @@ public class GestionReclamationUser {
 
 	public void setDetailsReclamation(Reclamation detailsReclamation) {
 		this.detailsReclamation = detailsReclamation;
+	}
+
+
+
+	public String getMessageErr() {
+		return messageErr;
+	}
+
+
+
+	public void setMessageErr(String messageErr) {
+		this.messageErr = messageErr;
 	}
 	
 

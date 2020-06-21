@@ -11,7 +11,7 @@ public class FormulaireStatistiqueTest {
 	@Test
 	public void test() {
 		FormulaireStatistique formulaireStatistique=new FormulaireStatistique();
-		int expected=1;
+		int expected=10;
 		int totalCase=20;
 		int totalRecovered=5;
 		int TotalDeaths=5;

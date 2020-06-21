@@ -64,7 +64,7 @@
 		</div>
  -->
 
-		<div class="columns container-body">
+		<div class="columns margin">
 			<!-- Earnings (Monthly) Card Example -->
 			<div class="col">
 				<div class="card border-left-warning shadow h-100 py-2">
@@ -156,6 +156,34 @@
 					</div>
 				</div>
 			</div>
+			<div class="col">
+				<div class="card border-left-info shadow h-100 py-2">
+					<div class="card-body">
+						<div class="row no-gutters align-items-center">
+							<div class="col mr-2">
+								<div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total
+									testes
+								</div>
+								<div class="row no-gutters align-items-center">
+									<div class="col-auto">
+										<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+											<h:outputLabel value="#{accueil.totalTests}" />
+										</div>
+									</div>
+
+								</div>
+							</div>
+							<div class="col-auto">
+								<i class="fas fa-info-circle fa-2x text-info"></i>
+							</div>
+
+						</div>
+						<div class="h5 mb-0 font-weight-bold text-info">
+							<h:outputLabel value="#{accueil.newTests}" />
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 		<div class="container-body">
 			<p:chart type="bar" model="#{accueil.barModel}" />
@@ -200,7 +228,7 @@
 				<h1>
 					<h:outputLabel value="#{accueil.regionForDetails.nom}" />
 				</h1>
-				<div class="row table">
+				<div class="row table columns">
 					<div class="col">
 						<div class="card border-left-warning shadow h-100 py-2">
 							<div class="card-body">
@@ -275,7 +303,32 @@
 							</div>
 						</div>
 					</div>
+								<div class="col">
+				<div class="card border-left-info shadow h-100 py-2">
+					<div class="card-body">
+						<div class="row no-gutters align-items-center">
+							<div class="col mr-2">
+								<div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total
+									testes
+								</div>
+								<div class="row no-gutters align-items-center">
+									<div class="col-auto">
+										<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+											<h:outputLabel value="#{accueil.regionForDetails.totalTests}" />
+										</div>
+									</div>
 
+								</div>
+							</div>
+							<div class="col-auto">
+								<i class="fas fa-info-circle fa-2x text-info"></i>
+							</div>
+
+						</div>
+						
+					</div>
+				</div>
+			</div>
 
 				</div>
 

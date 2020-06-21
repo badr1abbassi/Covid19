@@ -5,152 +5,270 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
 	<title>ApplicationStatus</title>
-	<link href="css/style.css" rel="stylesheet" />
 	<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
 	<link href="css/sb-admin-2.css" rel="stylesheet" />
+	<link href="css/style.css" rel="stylesheet" />
+	 <script src="js/icons.js"></script>
 </h:head>
-<h:body>
-	<h:form>
-		<div class="row">
-			<h1>Statistique</h1>
-		</div>
-		<div class="row">
+<h:body class='body'>
+	<nav class="navigation-bar">
+			<h:selectBooleanCheckbox id="check"/>
+            <label for="check" class="checkbtn"><i class="fas fa-bars"></i></label>
+            <div class="log">
+                <h1>COVID 19</h1>
+            </div>
+       
+		<ul class="nav-items">
+			<li class="consulter active">
+				<h:form>
+					<h:commandButton value="Ajouter des données"
+						action="#{admin.action}">
+						<f:param name="action" value="addStatistique" />
+					</h:commandButton>
+				</h:form>
+			</li>
+			<li class="consulter">
+				<h:form>
+					<h:commandButton value="Visualiser les statistiques"
+							action="#{admin.action}">
+							<f:param name="action" value="checkStatistique" />
+					</h:commandButton>
+				</h:form>
+			</li>
+			<li class="consulter">
+				<h:form>
+					<h:commandButton value="voir les reclamations"
+						action="#{admin.action}">
+						<f:param name="action" value="checkReclamations" />
+					</h:commandButton>
+				</h:form>
+			</li>	
+		</ul>		
+
+		<div class="param">
+            <div class="last-par">
+                <ul>
+                    <li id="li-dec"><i class="fa fa-sign-out" aria-hidden="true"></i></li>
+                    <p class="desc desc-dec" id="dec">Deconnexion</p>
+                </ul>
+            </div>
+        </div>
+	</nav>
+	<div class="container-home">
+	<div class="container-header container-img-header">
+            <div class="overlay"></div>
+             <img src="img/hope1.jpg"  class="img-header"/>
+            <h1 class="text-header">Ajouter les données</h1>
+        </div>
+	<h:form class="stat">
+		<div class="container-body">
 			<h1>Fès-Meknès</h1>
-			<label>newCases</label>
-			<h:inputText value="#{formulaireStatistique.region1.newCases}" />
-			<label>tests</label>
-			<h:inputText value="#{formulaireStatistique.region1.tests}" />
-			<label>newRecovered</label>
-			<h:inputText value="#{formulaireStatistique.region1.newRecovered}" />
-			<label>newDeaths</label>
-			<h:inputText value="#{formulaireStatistique.region1.newDeaths}" />
+			<div class="buttons-inline">
+				<label>Nouveaux cas <h:inputText value="#{formulaireStatistique.region1.newCases}" /></label>
+				
+				<label>Le nombre des testes <h:inputText value="#{formulaireStatistique.region1.tests}" /></label>
+				
+				<label>New Recovered <h:inputText value="#{formulaireStatistique.region1.newRecovered}" /></label>
+				
+				<label>New Deaths <h:inputText value="#{formulaireStatistique.region1.newDeaths}" /></label>
+				
+			</div>
 		</div>
-		<div class="row">
+		<div class="container-body">
 			<h1>Oriental</h1>
-			<label>newCases</label>
-			<h:inputText value="#{formulaireStatistique.region2.newCases}" />
-			<label>tests</label>
-			<h:inputText value="#{formulaireStatistique.region2.tests}" />
-			<label>newRecovered</label>
-			<h:inputText value="#{formulaireStatistique.region2.newRecovered}" />
-			<label>newDeaths</label>
-			<h:inputText value="#{formulaireStatistique.region2.newDeaths}" />
+			<div class="buttons-inline">
+				<label>Nouveaux cas <h:inputText value="#{formulaireStatistique.region2.newCases}" /></label>
+				
+				<label>Le nombre des testes
+					<h:inputText value="#{formulaireStatistique.region2.tests}" />
+				</label>
+				<label>New Recovered
+				<h:inputText value="#{formulaireStatistique.region2.newRecovered}" />
+				</label>
+				<label>New Deaths
+				<h:inputText value="#{formulaireStatistique.region2.newDeaths}" />
+				</label>
+			</div>
 		</div>
-		<div class="row">
+		<div class="container-body">
 			<h1>Guelmim-Oued Noun</h1>
-			<label>newCases</label>
-			<h:inputText value="#{formulaireStatistique.region3.newCases}" />
-			<label>tests</label>
-			<h:inputText value="#{formulaireStatistique.region3.tests}" />
-			<label>newRecovered</label>
-			<h:inputText value="#{formulaireStatistique.region3.newRecovered}" />
-			<label>newDeaths</label>
-			<h:inputText value="#{formulaireStatistique.region3.newDeaths}" />
+			<div class="buttons-inline">
+				<label>Nouveaux cas
+				<h:inputText value="#{formulaireStatistique.region3.newCases}" />
+				</label>
+				<label>Le nombre des testes
+				<h:inputText value="#{formulaireStatistique.region3.tests}" />
+				</label>
+				<label>New Recovered
+				<h:inputText value="#{formulaireStatistique.region3.newRecovered}" />
+				</label>
+				<label>New Deaths
+				<h:inputText value="#{formulaireStatistique.region3.newDeaths}" />
+				</label>
+			</div>
 		</div>
-		<div class="row">
-			<h1>Souss-Massa</h1>
-			<label>newCases</label>
-			<h:inputText value="#{formulaireStatistique.region4.newCases}" />
-			<label>tests</label>
-			<h:inputText value="#{formulaireStatistique.region4.tests}" />
-			<label>newRecovered</label>
-			<h:inputText value="#{formulaireStatistique.region4.newRecovered}" />
-			<label>newDeaths</label>
-			<h:inputText value="#{formulaireStatistique.region4.newDeaths}" />
+	
+		<div class="container-body">
+			<h1>Sous Masaa</h1>
+			<div class="buttons-inline">
+				<label>Nouveaux cas
+				<h:inputText value="#{formulaireStatistique.region4.newCases}" />
+				</label>
+				<label>Le nombre des testes
+				<h:inputText value="#{formulaireStatistique.region4.tests}" />
+				</label>
+				<label>New Recovered
+				<h:inputText value="#{formulaireStatistique.region4.newRecovered}" />
+				</label>
+				<label>New Deaths
+				<h:inputText value="#{formulaireStatistique.region4.newDeaths}" />
+				</label>
+			</div>
 		</div>
-		<div class="row">
+		
+		<div class="container-body">
 			<h1>Drâa-Tafilalet</h1>
-			<label>newCases</label>
-			<h:inputText value="#{formulaireStatistique.region5.newCases}" />
-			<label>tests</label>
-			<h:inputText value="#{formulaireStatistique.region5.tests}" />
-			<label>newRecovered</label>
-			<h:inputText value="#{formulaireStatistique.region5.newRecovered}" />
-			<label>newDeaths</label>
-			<h:inputText value="#{formulaireStatistique.region5.newDeaths}" />
+			<div class="buttons-inline">
+				<label>Nouveaux cas
+				<h:inputText value="#{formulaireStatistique.region5.newCases}" />
+				</label>
+				<label>Le nombre des testes
+				<h:inputText value="#{formulaireStatistique.region5.tests}" />
+				</label>
+				<label>New Recovered
+				<h:inputText value="#{formulaireStatistique.region5.newRecovered}" />
+				</label>
+				<label>New Deaths
+				<h:inputText value="#{formulaireStatistique.region5.newDeaths}" />
+				</label>
+			</div>
 		</div>
-		<div class="row">
+		
+		<div class="container-body">
 			<h1>Marrakech-Safi</h1>
-			<label>newCases</label>
-			<h:inputText value="#{formulaireStatistique.region6.newCases}" />
-			<label>tests</label>
-			<h:inputText value="#{formulaireStatistique.region6.tests}" />
-			<label>newRecovered</label>
-			<h:inputText value="#{formulaireStatistique.region6.newRecovered}" />
-			<label>newDeaths</label>
-			<h:inputText value="#{formulaireStatistique.region6.newDeaths}" />
+			<div class="buttons-inline">
+				<label>Nouveaux cas
+				<h:inputText value="#{formulaireStatistique.region6.newCases}" />
+				</label>
+				<label>Le nombre des testes
+				<h:inputText value="#{formulaireStatistique.region6.tests}" />
+				</label>
+				<label>New Recovered
+				<h:inputText value="#{formulaireStatistique.region6.newRecovered}" />
+				</label>
+				<label>New Deaths
+				<h:inputText value="#{formulaireStatistique.region6.newDeaths}" />
+				</label>
+			</div>
 		</div>
-		<div class="row">
+		<div class="container-body">
 			<h1>Casablanca-Settat</h1>
-			<label>newCases</label>
-			<h:inputText value="#{formulaireStatistique.region7.newCases}" />
-			<label>tests</label>
-			<h:inputText value="#{formulaireStatistique.region7.tests}" />
-			<label>newRecovered</label>
-			<h:inputText value="#{formulaireStatistique.region7.newRecovered}" />
-			<label>newDeaths</label>
-			<h:inputText value="#{formulaireStatistique.region7.newDeaths}" />
+			<div class="buttons-inline">
+				<label>Nouveaux cas
+				<h:inputText value="#{formulaireStatistique.region7.newCases}" />
+				</label>
+				<label>Le nombre des testes
+				<h:inputText value="#{formulaireStatistique.region7.tests}" />
+				</label>
+				<label>newRecovered
+				<h:inputText value="#{formulaireStatistique.region7.newRecovered}" />
+				</label>
+				<label>newDeaths
+				<h:inputText value="#{formulaireStatistique.region7.newDeaths}" />
+				</label>
+			</div>
 		</div>
-		<div class="row">
+		<div class="container-body">
 			<h1>Béni Mellal-Khénifra</h1>
-			<label>newCases</label>
-			<h:inputText value="#{formulaireStatistique.region8.newCases}" />
-			<label>tests</label>
-			<h:inputText value="#{formulaireStatistique.region8.tests}" />
-			<label>newRecovered</label>
-			<h:inputText value="#{formulaireStatistique.region8.newRecovered}" />
-			<label>newDeaths</label>
-			<h:inputText value="#{formulaireStatistique.region8.newDeaths}" />
+			<div class="buttons-inline">
+				<label>Nouveaux cas
+				<h:inputText value="#{formulaireStatistique.region8.newCases}" />
+				</label>
+				<label>Le nombre des testes
+				<h:inputText value="#{formulaireStatistique.region8.tests}" />
+				</label>
+				<label>newRecovered
+				<h:inputText value="#{formulaireStatistique.region8.newRecovered}" />
+				</label>
+				<label>newDeaths
+				<h:inputText value="#{formulaireStatistique.region8.newDeaths}" />
+				</label>
+			</div>
 		</div>
-		<div class="row">
+		<div class="container-body">
 			<h1>Tanger-Tétouan-Al Hoceïma</h1>
-			<label>newCases</label>
-			<h:inputText value="#{formulaireStatistique.region9.newCases}" />
-			<label>tests</label>
-			<h:inputText value="#{formulaireStatistique.region9.tests}" />
-			<label>newRecovered</label>
-			<h:inputText value="#{formulaireStatistique.region9.newRecovered}" />
-			<label>newDeaths</label>
-			<h:inputText value="#{formulaireStatistique.region9.newDeaths}" />
+			<div class="buttons-inline">
+				<label>Nouveaux cas
+				<h:inputText value="#{formulaireStatistique.region9.newCases}" />
+				</label>
+				<label>Le nombre des testes
+				<h:inputText value="#{formulaireStatistique.region9.tests}" />
+				</label>
+				<label>newRecovered
+				<h:inputText value="#{formulaireStatistique.region9.newRecovered}" />
+				</label>
+				<label>newDeaths
+				<h:inputText value="#{formulaireStatistique.region9.newDeaths}" />
+				</label>
+			</div>
 		</div>
-		<div class="row">
+		<div class="container-body">
 			<h1>Rabat-Salé-Kénitra</h1>
-			<label>newCases</label>
-			<h:inputText value="#{formulaireStatistique.region10.newCases}" />
-			<label>tests</label>
-			<h:inputText value="#{formulaireStatistique.region10.tests}" />
-			<label>newRecovered</label>
-			<h:inputText value="#{formulaireStatistique.region10.newRecovered}" />
-			<label>newDeaths</label>
-			<h:inputText value="#{formulaireStatistique.region10.newDeaths}" />
+			<div class="buttons-inline">
+			<label>Nouveaux cas
+				<h:inputText value="#{formulaireStatistique.region10.newCases}" />
+				</label>
+				<label>Le nombre des testes
+				<h:inputText value="#{formulaireStatistique.region10.tests}" />
+				</label>
+				<label>newRecovered
+				<h:inputText value="#{formulaireStatistique.region10.newRecovered}" />
+				</label>
+				<label>newDeaths
+				<h:inputText value="#{formulaireStatistique.region10.newDeaths}" />
+				</label>
+			</div>
 		</div>
-		<div class="row">
+		<div class="container-body">
 			<h1>Dakhla-Oued Ed Dahab</h1>
-			<label>newCases</label>
-			<h:inputText value="#{formulaireStatistique.region11.newCases}" />
-			<label>tests</label>
-			<h:inputText value="#{formulaireStatistique.region11.tests}" />
-			<label>newRecovered</label>
-			<h:inputText value="#{formulaireStatistique.region11.newRecovered}" />
-			<label>newDeaths</label>
-			<h:inputText value="#{formulaireStatistique.region11.newDeaths}" />
+			<div class="buttons-inline">
+				<label>Nouveaux cas
+				<h:inputText value="#{formulaireStatistique.region11.newCases}" />
+				</label>
+				<label>Le nombre des testes
+				<h:inputText value="#{formulaireStatistique.region11.tests}" />
+				</label>
+				<label>newRecovered
+				<h:inputText value="#{formulaireStatistique.region11.newRecovered}" />
+				</label>
+				<label>newDeaths
+				<h:inputText value="#{formulaireStatistique.region11.newDeaths}" />
+				</label>
+			</div>
 		</div>
-		<div class="row">
+		<div class="container-body">
 			<h1>Laâyoune-Sakia El Hamra</h1>
-			<label>newCases</label>
-			<h:inputText value="#{formulaireStatistique.region12.newCases}" />
-			<label>tests</label>
-			<h:inputText value="#{formulaireStatistique.region12.tests}" />
-			<label>newRecovered</label>
-			<h:inputText value="#{formulaireStatistique.region12.newRecovered}" />
-			<label>newDeaths</label>
-			<h:inputText value="#{formulaireStatistique.region12.newDeaths}" />
+			<div class="buttons-inline">
+				<label>Nouveaux cas
+				<h:inputText value="#{formulaireStatistique.region12.newCases}" />
+				</label>
+				<label>Le nombre des testes
+				<h:inputText value="#{formulaireStatistique.region12.tests}" />
+				</label>
+				<label>newRecovered
+				<h:inputText value="#{formulaireStatistique.region12.newRecovered}" />
+				</label>
+				<label>newDeaths
+				<h:inputText value="#{formulaireStatistique.region12.newDeaths}" />
+				</label>
+			</div>
 		</div>
-		<div class="row">
-			<h:commandButton value="Login" action="#{formulaireStatistique.action}">
+		<div class="container-body buttons-inline">
+			<h:commandButton class="btn btn-success" value="Sauvegarder" action="#{formulaireStatistique.action}">
 			</h:commandButton>
 		</div>
 
 	</h:form>
+	</div>
 </h:body>
 </html>
