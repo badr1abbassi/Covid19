@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jstl/core">
 <h:head>
 	<title>Accueil</title>
 	<!-- Custom fonts for this template-->
@@ -222,7 +223,7 @@
 				</h:dataTable>
 			</h:form>
 		</div>
-
+ 		<c:if test="#{not empty accueil.regionForDetails}">
 		<div class="container-body">
 			<h:panelGroup rendered="#{not empty accueil.regionForDetails}">
 				<h1>
@@ -364,6 +365,7 @@
 			</h:panelGroup>
 
 		</div>
+		</c:if>
 	</div>
 	<script src="js/sortedTable.js"></script>
 	<script src="js/pop-up.js"></script>

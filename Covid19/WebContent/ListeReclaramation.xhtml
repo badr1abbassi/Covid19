@@ -3,7 +3,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/mobile">
+	xmlns:p="http://primefaces.org/mobile"
+	xmlns:c="http://java.sun.com/jstl/core">
 <h:head>
 	<title>ApplicationStatus</title>
 <title>Liste des réclamations</title>
@@ -56,7 +57,13 @@
             </div>
         </div>
 	</nav>
+	
 	<div class="container">
+	<div class="container-header container-img-header">
+            <div class="overlay"></div>
+           <img src="img/hope1.jpg"  class="img-header"/>
+            <h1 class="text-header">Réclamations</h1>
+    </div>
 	<div class="container-body">
 		<h:form class='table table-div'>
 			<h:dataTable class="table table-sortable table-striped table-bordered table-sm" value="#{gestionReclamations.listReclamations}"
@@ -84,45 +91,54 @@
 			</h:dataTable>
 		</h:form>
 	</div>
+	 <c:if test="#{not empty gestionReclamations.detailsReclamation}">
 	<div class="container-body">
 	<h:form rendered="#{not empty gestionReclamations.detailsReclamation }">
 	
 				<h1>NUM de tél: <h:outputLabel var="id"
 						value="#{gestionReclamations.detailsReclamation.numeroTel}" /></h1>
-				<h:dataTable class="table table-sortable table-striped table-bordered table-sm" value="#{gestionReclamations.listReclamations}"
-				var="reclamation" style="margin-top:40px" reflow="true"
-				paginator="true">
-				<h:column>
-					<!-- column header -->
-					<f:facet name="header">Région</f:facet>
-					<!-- row record -->
-    				#{gestionReclamations.detailsReclamation.region}
-    			</h:column>
-				<h:column>
-					<f:facet name="header">Toux</f:facet>
-    				#{gestionReclamations.detailsReclamation.toux}
-    			</h:column>
-				<h:column>
-					<f:facet name="header">Fièvre</f:facet>
-    				#{gestionReclamations.detailsReclamation.fievre}
-    			</h:column>
-				<h:column>
-					<f:facet name="header">Respiration</f:facet>
-					#{gestionReclamations.detailsReclamation.diffRespiratoire}
-				</h:column>
-				<h:column>
-					<f:facet name="header">Fatigue</f:facet>
-					#{gestionReclamations.detailsReclamation.fatigue}
-				</h:column>
-				<h:column>
-					<f:facet name="header">Pneumonie</f:facet>
-					#{gestionReclamations.detailsReclamation.diffRespiratoire}
-				</h:column>
-			</h:dataTable>
-			
+				
+					<table class="table">
+			<THEAD>
+				<th>Région</th>
+				<th>Toux</th>
+				<th>Fièvre</th>
+				<th>Réspiration</th>
+				<th>Fatigue</th>
+				<th>Pneumonie</th>
+			</THEAD>
+			<tr>
+				<td>
+					<h:outputLabel
+							value="#{gestionReclamations.detailsReclamation.region}" />
+				</td>
+				<td>
+					<h:outputLabel
+							value="#{gestionReclamations.detailsReclamation.toux}" />
+				</td>
+				<td>
+					<h:outputLabel
+							value="#{gestionReclamations.detailsReclamation.fievre}" />
+				</td>
+				<td>
+					<h:outputLabel
+							value="#{gestionReclamations.detailsReclamation.diffRespiratoire}" />
+				</td>
+				<td>
+					<h:outputLabel
+							value="#{gestionReclamations.detailsReclamation.fatigue}" />
+					
+				</td>
+				<td>
+					<h:outputLabel
+							value="#{gestionReclamations.detailsReclamation.pneumonie}" />
+				</td>
+			</tr>
+			</table>
+				
 				<div class="buttons-inline">
 					<label>Plus de details:</label>
-					<h:outputText class="login-input" value="#{gestionReclamations.detailsReclamation.details}" />
+					<h:inputText class="login-input" value="#{gestionReclamations.detailsReclamation.details}" />
 				</div>
 				<div class="buttons-inline">
 					<label>votre decision:</label>
@@ -139,6 +155,7 @@
 				
 		
 		</div>
+		 </c:if>
 	</div>
 	<script src="js/sortedTable.js"></script>
 	<script src="js/pop-up.js"></script>
