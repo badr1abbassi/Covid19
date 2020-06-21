@@ -75,7 +75,6 @@ public class GestionReclamationUser {
 	}
 
 	public void myAction() {
-		System.out.println("consulter " + numeroTel);
 		try {
 			FileInputStream serviceAccount = new FileInputStream(
 					"C:/Users/badre/git/Covid19/Covid19/serviceAccount.json");

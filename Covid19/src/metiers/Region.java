@@ -12,6 +12,8 @@ public class Region {
 	private int totalTests;
 	private Vector<Statistique> listStatistique;
 	
+
+
 	public Map<String, Object> getHashMap(){
 		Map<String, Object> data = new HashMap<>();
 		data.put("nom",nom);

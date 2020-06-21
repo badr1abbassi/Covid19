@@ -15,7 +15,6 @@ public class Admin {
 	      switch(actionValue) 
 	        { 
 	            case "addStatistique": 
-	                System.out.println("addStatistique");
 	                return "FormulaireStatistique";
 	               
 	            case "checkStatistique": 

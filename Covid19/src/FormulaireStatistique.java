@@ -112,19 +112,13 @@ public class FormulaireStatistique {
 			ApiFuture<DocumentSnapshot> future = docRef.get();
 			DocumentSnapshot document = future.get();
 			if (document.exists()) {
-				int totalCase = Math.toIntExact((Long) document.get("totalCase"));
-				int totalRecovered = Math.toIntExact((Long) document.get("totalRecovered"));
-				int TotalDeaths = Math.toIntExact((Long) document.get("TotalDeaths"));
-				int totalTests = Math.toIntExact((Long) document.get("totalTests"));
-
+				Map<String, Object> newData = getHashmapTotal(list);
+				ApiFuture<WriteResult> result = docRef.set(newData);
+				System.out.println("Update time : " + result.get().getUpdateTime());
 			} else {
 				System.out.println("No such document!");
 			}
-			Map<String, Object> newData = getHashmapTotal(list);
-
-			ApiFuture<WriteResult> result = docRef.set(newData);
-			System.out.println("Update time : " + result.get().getUpdateTime());
-			System.out.println("doneeee");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -237,7 +231,7 @@ public class FormulaireStatistique {
 			if (document.exists()) {
 				int totalCase = Math.toIntExact((Long) document.get("totalCase"));
 				int totalRecovered = Math.toIntExact((Long) document.get("totalRecovered"));
-				int TotalDeaths = Math.toIntExact((Long) document.get("TotalDeaths"));
+				int TotalDeaths = Math.toIntExact((Long) document.get("totalDeaths"));
 				int totalTests = Math.toIntExact((Long) document.get("totalTests"));
 				int newCases = 0, newRecovered = 0, newDeaths = 0, newTests = 0,activecases;
 				for (int i = 0; i < 12; i++) {
@@ -250,7 +244,7 @@ public class FormulaireStatistique {
 				totalRecovered+=newRecovered;
 				TotalDeaths+=newDeaths;
 				totalTests+=newTests;
-				activecases=totalCase-totalRecovered-TotalDeaths;
+				activecases=calculateActiveCases(totalCase,totalRecovered,TotalDeaths);
 				
 				newData.put("totalCase", totalCase);
 				newData.put("totalRecovered", totalRecovered);
@@ -272,6 +266,9 @@ public class FormulaireStatistique {
 	
 		return newData;
 
+	}
+	public int calculateActiveCases(int totalCase,int totalRecovered, int TotalDeaths) {
+		return totalCase-totalRecovered-TotalDeaths;
 	}
 
 }

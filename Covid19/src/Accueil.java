@@ -76,7 +76,6 @@ public class Accueil {
 				System.out.println("No such document!");
 			}
 			for (int i = 0; i < 12; i++) {
-				System.out.println("region " + tableauRegions[i]);
 				Region region = new Region(tableauRegions[i]);
 				ApiFuture<QuerySnapshot> statisticRef = FirestoreClient.getFirestore().collection("national")
 						.document("nationalStatistique").collection("regions").document(tableauRegions[i])
