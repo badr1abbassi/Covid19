@@ -44,9 +44,9 @@ public class Accueil {
 	private Region regionForDetails;
 	private ArrayList<Region> listRegion = new ArrayList<Region>();;
 	private BarChartModel barModel;
-	private String tableauRegions[] = { "Fès-Meknès", "Oriental", "Guelmim-Oued Noun", "Souss-Massa", "Drâa-Tafilalet",
-			"Marrakech-Safi", "Casablanca-Settat", "Béni Mellal-Khénifra", "Tanger-Tétouan-Al Hoceïma",
-			"Rabat-Salé-Kénitra", "Dakhla-Oued Ed Dahab", "Laâyoune-Sakia El Hamra" };
+	private String tableauRegions[] = { "Fï¿½s-Meknï¿½s", "Oriental", "Guelmim-Oued Noun", "Souss-Massa", "Drï¿½a-Tafilalet",
+			"Marrakech-Safi", "Casablanca-Settat", "Bï¿½ni Mellal-Khï¿½nifra", "Tanger-Tï¿½touan-Al Hoceï¿½ma",
+			"Rabat-Salï¿½-Kï¿½nitra", "Dakhla-Oued Ed Dahab", "Laï¿½youne-Sakia El Hamra" };
 	public Accueil() {
 		try {
 			FileInputStream serviceAccount = new FileInputStream(
