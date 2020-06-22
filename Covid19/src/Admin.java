@@ -27,5 +27,8 @@ public class Admin {
 	        }
 	      return "Accueil";
 	}
+	public String accueil() {
+	      return "Accueil";
+	}
 
 }

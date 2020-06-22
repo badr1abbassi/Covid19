@@ -16,7 +16,9 @@
 			<h:selectBooleanCheckbox id="check"/>
             <label for="check" class="checkbtn"><i class="fas fa-bars"></i></label>
             <div class="log">
-                <h1>COVID 19</h1>
+               	<h:form class="consulter">
+			<h:commandLink value="Covid-19 " class="h1" style="color:#707070"  action="#{accueil.home}"/>
+				</h:form>
             </div>
        
 		<ul class="nav-items">
@@ -49,7 +51,13 @@
 		<div class="param">
             <div class="last-par">
                 <ul>
-                    <li id="li-dec"><i class="fa fa-sign-out" aria-hidden="true"></i></li>
+                    <li id="li-dec">
+	                    <h:form class="consulter">
+		                    <h:commandLink action="#{admin.accueil}">
+								<i class="fa fa-sign-out" aria-hidden="true"></i>
+							</h:commandLink>
+						</h:form>
+					</li>
                     <p class="desc desc-dec" id="dec">Deconnexion</p>
                 </ul>
             </div>

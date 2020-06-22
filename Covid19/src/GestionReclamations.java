@@ -37,7 +37,7 @@ public class GestionReclamations {
 	public void initReclamation() {
 		try {
 			FileInputStream serviceAccount = new FileInputStream(
-					"C:/Users/XPS/git/Covid19/Covid19/serviceAccount.json");
+					"C:/Users/badre/git/Covid19/Covid19/serviceAccount.json");
 			FirebaseOptions options = new FirebaseOptions.Builder()
 					.setCredentials(GoogleCredentials.fromStream(serviceAccount))
 					.setDatabaseUrl("https://covid19-10abd.firebaseio.com").build();
@@ -74,7 +74,7 @@ public class GestionReclamations {
 		try {
 
 			FileInputStream serviceAccount = new FileInputStream(
-					"C:/Users/XPS/git/Covid19/Covid19/serviceAccount.json");
+					"C:/Users/badre/git/Covid19/Covid19/serviceAccount.json");
 			FirebaseOptions options = new FirebaseOptions.Builder()
 					.setCredentials(GoogleCredentials.fromStream(serviceAccount))
 					.setDatabaseUrl("https://covid19-10abd.firebaseio.com").build();

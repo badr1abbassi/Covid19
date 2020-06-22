@@ -16,8 +16,14 @@
 </h:head>
 <h:body class='body'>
 	<nav class="navigation-bar">
-		<h1>Covid-19</h1>
-				
+		<h:form class="consulter">
+			<h:commandLink value="Covid-19 " class="h1" style="color:#707070"  action="#{accueil.home}"/>
+		</h:form>
+		<div class="consulter">
+				<h:form>
+					<h:commandLink value="Sensibilisation" action="#{accueil.sensibilisation}" />
+				</h:form>
+			</div>		
 		<h:form class="buttons-inline">
 			<h:inputText class="login-input" pt:placeholder="Num de tél" value="#{gestionReclamationUser.numeroTel}" />
 			<h:commandButton class="btn btn-success" value="Voir la réponse" action="#{gestionReclamationUser.myAction}" />

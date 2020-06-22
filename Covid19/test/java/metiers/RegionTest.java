@@ -20,7 +20,7 @@ public class RegionTest {
 		listStatistique.add(s2);
 		listStatistique.add(s3);
 		Region region=new Region("Fès-Meknès", listStatistique);
-		int expectedTests=300;
+		int expectedTests=100;
 		int actualTests=region.getTotalTests_();
 		assertEquals(expectedTests, actualTests);
 	}
