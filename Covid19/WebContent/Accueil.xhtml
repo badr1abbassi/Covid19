@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:c="http://java.sun.com/jstl/core">
 <h:head>
@@ -14,15 +16,23 @@
 </h:head>
 <h:body class='body'>
 	<nav class="nav-index">
-		<h1>Covid-19</h1>
+		<h1>
+			<h:form >
+				<h:commandLink value="Covid 19" action="#{admin.accueil}" style="color:#707070"/>
+			</h:form>
+		</h1>
 		<div class="buttons-inline">
+			<div class="consulter">
+				<h:form>
+					<h:commandLink value="Sensibilisation" action="#{accueil.sensibilisation}" />
+				</h:form>
+			</div>
 			<div class="consulter">
 				<h:form>
 					<h:commandLink value="Consulter" action="#{accueil.consulter}" />
 				</h:form>
 			</div>
 			<h:commandButton id="admin" class="btn btn-success" value="Admin" />
-			
 		</div>
 	</nav>
 	<div class="bg-modal" id="modal">
@@ -36,13 +46,13 @@
                     <div>
 						<label>
                             <span>Identifiant</span>
-                            <h:inputText class='login-input' value="#{accueil.login}" />
+                            <p:inputText class='login-input' value="#{accueil.login}" />
                         </label>
 						</div>
 						<div>
 						<label>
                             <span>Mot de passe</span>
-                            <h:inputText class='login-input' value="#{accueil.mdp}" />
+                            <p:password class='login-input' value="#{accueil.mdp}" />
                         </label>
 						</div>
 						<h:commandButton class="btn btn-success" value="Login" action="#{accueil.action}" />
@@ -187,14 +197,14 @@
 			</div>
 		</div>
 		<div class="container-body">
-			<p:chart type="bar" model="#{accueil.barModel}" />
+			<p:chart type="bar" model="#{accueil.barModel}"/>
 		</div>
 
 		<div class="container-body">
 			<h1>Les statistiques des regions</h1>
 			<h:form class='table'>
 				<h:dataTable class="table table-sortable table-striped table-bordered table-sm"
-					value="#{accueil.listRegion}" var="region" reflow="true" paginator="true">
+					value="#{accueil.listRegion}" var="region" reflow="true" paginator="true" style="text-align:center">
 					<h:column class="tab-col">
 						<!-- column header -->
 						<f:facet name="header">Nom</f:facet>
@@ -218,7 +228,10 @@
 						#{region.totalTests}
 					</h:column>
 					<h:column>
-						<h:commandButton value="Détails" action="#{accueil.details(region)}" />
+						<f:facet name="header">Details</f:facet>
+						<h:commandLink action="#{accueil.details(region)}">
+							<i class="fa fa-chevron-right" aria-hidden="true"></i>
+						</h:commandLink>
 					</h:column>
 				</h:dataTable>
 			</h:form>
@@ -368,6 +381,7 @@
 		</c:if>
 	</div>
 	<script src="js/sortedTable.js"></script>
+	<script src="js/icons.js"></script>
 	<script src="js/pop-up.js"></script>
 </h:body>
 

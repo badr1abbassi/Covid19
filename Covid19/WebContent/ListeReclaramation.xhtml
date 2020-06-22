@@ -51,7 +51,13 @@
 		<div class="param">
             <div class="last-par">
                 <ul>
-                    <li id="li-dec"><i class="fa fa-sign-out" aria-hidden="true"></i></li>
+                    <li id="li-dec">
+	                    <h:form class="consulter">
+		                    <h:commandLink action="#{admin.accueil}">
+								<i class="fa fa-sign-out" aria-hidden="true"></i>
+							</h:commandLink>
+						</h:form>
+					</li>
                     <p class="desc desc-dec" id="dec">Deconnexion</p>
                 </ul>
             </div>
@@ -67,7 +73,7 @@
 	<div class="container-body">
 		<h:form class='table table-div'>
 			<h:dataTable class="table table-sortable table-striped table-bordered table-sm" value="#{gestionReclamations.listReclamations}"
-				var="reclamation" style="margin-top:40px" reflow="true"
+				var="reclamation" style="margin-top:40px; text-align:center" reflow="true"
 				paginator="true">
 				<h:column>
 					<!-- column header -->
@@ -83,11 +89,13 @@
 					<f:facet name="header">Date</f:facet>
     				#{reclamation.time}
     			</h:column>
-				<h:column>
-					<f:facet name="header">details</f:facet>
-					<h:commandButton value="Détails"
-						actionListener="#{gestionReclamations.action(reclamation)}" />
-				</h:column>
+    			<h:column>
+						<f:facet name="header">Details</f:facet>
+						<h:commandLink actionListener="#{gestionReclamations.action(reclamation)}">
+							<i class="fa fa-chevron-right" aria-hidden="true"></i>
+						</h:commandLink>
+					</h:column>
+				
 			</h:dataTable>
 		</h:form>
 	</div>

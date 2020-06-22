@@ -8,7 +8,7 @@
 	 xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>ApplicationStatus</title>
+	<title>Consultation</title>
 	<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
 	<!-- Custom styles for this template-->
 	<link href="css/sb-admin-2.min.css" rel="stylesheet" />
@@ -16,13 +16,21 @@
 </h:head>
 <h:body class='body'>
 	<nav class="navigation-bar">
-		<h1>Covid-19</h1>
-				
-		<h:form class="buttons-inline">
-			<h:inputText class="login-input" pt:placeholder="Num de tél" value="#{gestionReclamationUser.numeroTel}" />
-			<h:commandButton class="btn btn-success" value="Voir la réponse" action="#{gestionReclamationUser.myAction}" />
-		</h:form>
-	
+		<h1>
+			<h:form >
+				<h:commandLink value="Covid 19" action="#{admin.accueil}" style="color:#707070"/>
+			</h:form>
+		</h1>
+		
+			<div class="consulter">
+				<h:form>
+					<h:commandLink value="Sensibilisation" action="#{accueil.sensibilisation}" />
+				</h:form>
+			</div>
+			<h:form class="buttons-inline">
+				<h:inputText class="login-input" pt:placeholder="Num de tél" value="#{gestionReclamationUser.numeroTel}" />
+				<h:commandButton class="btn btn-success" value="Voir la réponse" action="#{gestionReclamationUser.myAction}" />
+			</h:form>
 	</nav>
 	<div class="container-home">
 	<div class="container-header container-img-header">
