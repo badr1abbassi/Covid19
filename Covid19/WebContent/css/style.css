@@ -870,6 +870,7 @@ button{
 }
 .table-div{
     overflow-x: scroll;
+    width:100%
 }
 .table-div::-webkit-scrollbar {
     display: none;

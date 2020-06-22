@@ -194,7 +194,7 @@
 
 		<div class="container-body">
 			<h1>Les statistiques des regions</h1>
-			<h:form class='table'>
+			<h:form>
 				<div class="table-div">
 					<h:dataTable class="table table-sortable table-striped table-bordered table-sm"
 						value="#{accueil.listRegion}" var="region" reflow="true" paginator="true">
@@ -341,7 +341,7 @@
 
 				</div>
 
-				<div class="row table">
+				<div class="table-div">
 					<h:dataTable class="table table-sortable table-striped table-bordered table-sm"
 						value="#{accueil.regionForDetails.listStatistique}" var="statistique" style="margin-top:40px"
 						reflow="true" paginator="true">
