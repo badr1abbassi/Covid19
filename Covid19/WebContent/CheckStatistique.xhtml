@@ -1,66 +1,61 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
 	<title>Liste des statistiques</title>
 	<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
 	<link href="css/sb-admin-2.css" rel="stylesheet" />
 	<link href="css/style.css" rel="stylesheet" />
-	 <script src="js/icons.js"></script>
+	<script src="js/icons.js"></script>
 </h:head>
 <h:body class="body">
 
 
 	<nav class="navigation-bar">
-			<h:selectBooleanCheckbox id="check"/>
-            <label for="check" class="checkbtn"><i class="fas fa-bars"></i></label>
-            <div class="log">
-                <h1>COVID 19</h1>
-            </div>
-       
+		<h:selectBooleanCheckbox id="check" />
+		<label for="check" class="checkbtn"><i class="fas fa-bars"></i></label>
+		<div class="log">
+			<h1>COVID 19</h1>
+		</div>
+
 		<ul class="nav-items">
 			<li class="consulter">
 				<h:form>
-					<h:commandButton value="Ajouter des données"
-						action="#{admin.action}">
+					<h:commandButton value="Ajouter des données" action="#{admin.action}">
 						<f:param name="action" value="addStatistique" />
 					</h:commandButton>
 				</h:form>
 			</li>
 			<li class="consulter active">
 				<h:form>
-					<h:commandButton value="Visualiser les statistiques"
-							action="#{admin.action}">
-							<f:param name="action" value="checkStatistique" />
+					<h:commandButton value="Visualiser les statistiques" action="#{admin.action}">
+						<f:param name="action" value="checkStatistique" />
 					</h:commandButton>
 				</h:form>
 			</li>
 			<li class="consulter">
 				<h:form>
-					<h:commandButton value="voir les reclamations"
-						action="#{admin.action}">
+					<h:commandButton value="voir les reclamations" action="#{admin.action}">
 						<f:param name="action" value="checkReclamations" />
 					</h:commandButton>
 				</h:form>
-			</li>	
-		</ul>		
+			</li>
+		</ul>
 
 		<div class="param">
-            <div class="last-par">
-                <ul>
-                    <li id="li-dec">
-	                    <h:form class="consulter">
-		                    <h:commandLink action="#{admin.accueil}">
+			<div class="last-par">
+				<ul>
+					<li id="li-dec">
+						<h:form class="consulter">
+							<h:commandLink action="#{admin.accueil}">
 								<i class="fa fa-sign-out" aria-hidden="true"></i>
 							</h:commandLink>
 						</h:form>
 					</li>
-                    <p class="desc desc-dec" id="dec">Deconnexion</p>
-                </ul>
-            </div>
-        </div>
+					<p class="desc desc-dec" id="dec">Deconnexion</p>
+				</ul>
+			</div>
+		</div>
 	</nav>
 
 	<div class="container">
@@ -200,34 +195,40 @@
 		<div class="container-body">
 			<h1>Les statistiques des regions</h1>
 			<h:form class='table'>
-				<h:dataTable class="table table-sortable table-striped table-bordered table-sm"
-					value="#{accueil.listRegion}" var="region" reflow="true" paginator="true">
-					<h:column class="tab-col">
-						<!-- column header -->
-						<f:facet name="header">Nom</f:facet>
-						<!-- row record -->
-						#{region.nom}
-					</h:column>
-					<h:column>
-						<f:facet name="header">Total Cases</f:facet>
-						#{region.totalCases}
-					</h:column>
-					<h:column>
-						<f:facet name="header">Total Revovered</f:facet>
-						#{region.totalRecovered}
-					</h:column>
-					<h:column>
-						<f:facet name="header">Total Death</f:facet>
-						#{region.totalDeaths}
-					</h:column>
-					<h:column>
-						<f:facet name="header">Total Tests</f:facet>
-						#{region.totalTests}
-					</h:column>
-					<h:column>
-						<h:commandButton value="Détails" action="#{accueil.details(region)}" />
-					</h:column>
-				</h:dataTable>
+				<div class="table-div">
+					<h:dataTable class="table table-sortable table-striped table-bordered table-sm"
+						value="#{accueil.listRegion}" var="region" reflow="true" paginator="true">
+						<h:column class="tab-col">
+							<!-- column header -->
+							<f:facet name="header">Nom</f:facet>
+							<!-- row record -->
+							#{region.nom}
+						</h:column>
+						<h:column>
+							<f:facet name="header">Total Cases</f:facet>
+							#{region.totalCases}
+						</h:column>
+						<h:column>
+							<f:facet name="header">Total Revovered</f:facet>
+							#{region.totalRecovered}
+						</h:column>
+						<h:column>
+							<f:facet name="header">Total Death</f:facet>
+							#{region.totalDeaths}
+						</h:column>
+						<h:column>
+							<f:facet name="header">Total Tests</f:facet>
+							#{region.totalTests}
+						</h:column>
+						<h:column>
+							<f:facet name="header">Détails</f:facet>
+							<h:commandLink action="#{accueil.details(region)}">
+								<i class="fa fa-chevron-right" aria-hidden="true"></i>
+							</h:commandLink>
+						</h:column>
+
+					</h:dataTable>
+				</div>
 			</h:form>
 		</div>
 
@@ -311,32 +312,32 @@
 							</div>
 						</div>
 					</div>
-								<div class="col">
-				<div class="card border-left-info shadow h-100 py-2">
-					<div class="card-body">
-						<div class="row no-gutters align-items-center">
-							<div class="col mr-2">
-								<div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total
-									testes
-								</div>
+					<div class="col">
+						<div class="card border-left-info shadow h-100 py-2">
+							<div class="card-body">
 								<div class="row no-gutters align-items-center">
-									<div class="col-auto">
-										<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-											<h:outputLabel value="#{accueil.regionForDetails.totalTests}" />
+									<div class="col mr-2">
+										<div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total
+											testes
 										</div>
+										<div class="row no-gutters align-items-center">
+											<div class="col-auto">
+												<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+													<h:outputLabel value="#{accueil.regionForDetails.totalTests}" />
+												</div>
+											</div>
+
+										</div>
+									</div>
+									<div class="col-auto">
+										<i class="fas fa-info-circle fa-2x text-info"></i>
 									</div>
 
 								</div>
-							</div>
-							<div class="col-auto">
-								<i class="fas fa-info-circle fa-2x text-info"></i>
-							</div>
 
+							</div>
 						</div>
-						
 					</div>
-				</div>
-			</div>
 
 				</div>
 
@@ -376,4 +377,5 @@
 	<script src="js/sortedTable.js"></script>
 	<script src="js/pop-up.js"></script>
 </h:body>
+
 </html>

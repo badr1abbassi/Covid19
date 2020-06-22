@@ -1,11 +1,8 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
-	 xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-	 xmlns:c="http://java.sun.com/jstl/core"
-	 xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough" xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<title>Consultation</title>
@@ -17,146 +14,154 @@
 <h:body class='body'>
 	<nav class="navigation-bar">
 		<h1>
-			<h:form >
-				<h:commandLink value="Covid 19" action="#{admin.accueil}" style="color:#707070"/>
+			<h:form>
+				<h:commandLink value="Covid19" action="#{admin.accueil}" style="color:#707070" />
 			</h:form>
 		</h1>
-		
-			<div class="consulter">
-				<h:form>
-					<h:commandLink value="Sensibilisation" action="#{accueil.sensibilisation}" />
-				</h:form>
-			</div>
-			<h:form class="buttons-inline">
-				<h:inputText class="login-input" pt:placeholder="Num de tél" value="#{gestionReclamationUser.numeroTel}" />
-				<h:commandButton class="btn btn-success" value="Voir la réponse" action="#{gestionReclamationUser.myAction}" />
+
+		<div class="consulter">
+			<h:form>
+				<h:commandLink value="Sensibilisation" action="#{accueil.sensibilisation}" />
 			</h:form>
+		</div>
+		<h:form class="buttons-inline">
+			<h:inputText class="login-input" pt:placeholder="Num de tél" value="#{gestionReclamationUser.numeroTel}" />
+			<h:commandButton class="btn btn-success" value="Voir la réponse"
+				action="#{gestionReclamationUser.myAction}" />
+		</h:form>
 	</nav>
 	<div class="container-home">
-	<div class="container-header container-img-header">
-            <div class="overlay"></div>
-           <img src="img/hope1.jpg"  class="img-header"/>
-            <h1 class="text-header">Gestion des consultations</h1>
-    </div>
-        
- <c:if test="#{not empty gestionReclamationUser.messageErr}">
-        <h1 class="errorMsg btn-echec"><h:outputLabel value="#{gestionReclamationUser.messageErr}"  /></h1>
- </c:if>
-         
- <c:if test="#{not empty gestionReclamationUser.detailsReclamation}">
-<div class="container-body">
-	<h:panelGroup rendered="#{not empty gestionReclamationUser.detailsReclamation }">
-				<h1 class="h1-title">Détails de consultation</h1>
-			<table class="table">
-			<THEAD>
-				<th>Région</th>
-				<th>Toux</th>
-				<th>Fièvre</th>
-				<th>Réspiration</th>
-				<th>Fatigue</th>
-				<th>Pneumonie</th>
-			</THEAD>
-			<tr>
-				<td>
-					<h:outputLabel
-							value="#{gestionReclamationUser.detailsReclamation.region}" />
-				</td>
-				<td>
-					<h:outputLabel
-							value="#{gestionReclamationUser.detailsReclamation.toux}" />
-				</td>
-				<td>
-					<h:outputLabel
-							value="#{gestionReclamationUser.detailsReclamation.fievre}" />
-				</td>
-				<td>
-					<h:outputLabel
-							value="#{gestionReclamationUser.detailsReclamation.diffRespiratoire}" />
-				</td>
-				<td>
-					<h:outputLabel
-							value="#{gestionReclamationUser.detailsReclamation.fatigue}" />
-					
-				</td>
-				<td>
-					<h:outputLabel
-							value="#{gestionReclamationUser.detailsReclamation.pneumonie}" />
-				</td>
-			</tr>
-			</table>
-				
-				<div class='table'>
-					<div class="buttons-inline">
-						<label>Plus de details:</label>
-						<h:outputText class="login-input" value="#{gestionReclamationUser.detailsReclamation.details}" />
-					</div>
-				</div>
-				<div class='table'>	
-					<div class="buttons-inline">
-						<label>Decision docteur:</label>
-						<h:inputTextarea class="login-input" value="#{gestionReclamationUser.detailsReclamation.reponse}" cols="30"
-							rows="4" required="true"/>
-					</div>
-				</div>
-			</h:panelGroup>
-				
-</div>
- </c:if>
- <div class="container container-body">
- <h1 class="h1-title">Consulter notre docteur</h1>
- 	
-	<h:form>
-		
-		<h:panelGrid columns="2" style="margin-bottom:10px; width:100%">
-		 		<h:outputLabel for="@next" value="Numero de tel:" />
-		 		<h:inputText class="table" value="#{gestionReclamationUser.reclamation.numeroTel}" />
-		 	
-		        <h:outputLabel for="@next" value="Région:" />
-				<h:selectOneMenu id="region" value="#{gestionReclamationUser.reclamation.region}" effect="fold" editable="true">
-		            <f:selectItem itemLabel="Select One" itemValue="" />
-		            <f:selectItems value="#{gestionReclamationUser.listeRegions}" />
-		        </h:selectOneMenu>
-		        
-		        <h:outputLabel for="@next" value="Degré de toux:" />
-		        <p:selectOneRadio value="#{gestionReclamationUser.reclamation.toux}" layout="responsive" columns="3">
-					<f:selectItem itemValue="faible" itemLabel="Faible" />
-					<f:selectItem itemValue="moyen" itemLabel="Moyen" />
-					<f:selectItem itemValue="grave" itemLabel="Grave" />
-				</p:selectOneRadio>
-				 
-				 <h:outputLabel for="@next" value="Fièvre:" />
-				 <p:selectOneRadio value="#{gestionReclamationUser.reclamation.fievre}" layout="responsive" columns="3">
-					<f:selectItem itemValue="faible" itemLabel="Faible" />
-					<f:selectItem itemValue="moyen" itemLabel="Moyen" />
-					<f:selectItem itemValue="grave" itemLabel="Grave" />
-				</p:selectOneRadio>
-				<h:outputLabel for="@next" value="Taux de réspiration:" />
-				<p:selectOneRadio value="#{gestionReclamationUser.reclamation.diffRespiratoire}" layout="responsive" columns="3">
-					<f:selectItem itemValue="faible" itemLabel="Faible" />
-					<f:selectItem itemValue="moyen" itemLabel="Moyen" />
-					<f:selectItem itemValue="grave" itemLabel="Grave" />
-				</p:selectOneRadio>
-				<h:outputLabel for="@next" value="Fatigue:" />
-				<p:selectOneRadio value="#{gestionReclamationUser.reclamation.fatigue}" layout="responsive" columns="3">
-					<f:selectItem itemValue="oui" itemLabel="Oui" />
-					<f:selectItem itemValue="non" itemLabel="Non" />
-				</p:selectOneRadio>
-				<h:outputLabel for="@next" value="Vous avez un pneumonie" />
-				<p:selectOneRadio value="#{gestionReclamationUser.reclamation.pneumonie}" layout="responsive" columns="3">
-					<f:selectItem itemValue="oui" itemLabel="Oui" />
-					<f:selectItem itemValue="non" itemLabel="Non" />
-					<f:selectItem itemValue="aucune idee" itemLabel="aucune idee" />
-				</p:selectOneRadio>
-				<h:outputLabel for="@next" value="Plus de details:" />
-				<h:inputTextarea class="login-input" value="#{gestionReclamationUser.reclamation.details}" rows="5" />
-    	</h:panelGrid>
-		<div class="buttons-inline">
-		<h:commandButton class="btn btn-success" value="Envoyer" action="#{gestionReclamationUser.action}"/>
+		<div class="container-header container-img-header">
+			<div class="overlay"></div>
+			<img src="img/hope1.jpg" class="img-header" />
+			<h1 class="text-header">Gestion des consultations</h1>
 		</div>
-	</h:form>
-	</div>
+
+		<c:if test="#{not empty gestionReclamationUser.messageErr}">
+			<h1 class="errorMsg btn-echec">
+				<h:outputLabel value="#{gestionReclamationUser.messageErr}" />
+			</h1>
+		</c:if>
+
+		<c:if test="#{not empty gestionReclamationUser.detailsReclamation}">
+			<div class="container-body">
+				<h:panelGroup rendered="#{not empty gestionReclamationUser.detailsReclamation }">
+					<h1 class="h1-title">Détails de consultation</h1>
+					<table class="table">
+						<THEAD>
+							<th>Région</th>
+							<th>Toux</th>
+							<th>Fièvre</th>
+							<th>Réspiration</th>
+							<th>Fatigue</th>
+							<th>Pneumonie</th>
+						</THEAD>
+						<tr>
+							<td>
+								<h:outputLabel value="#{gestionReclamationUser.detailsReclamation.region}" />
+							</td>
+							<td>
+								<h:outputLabel value="#{gestionReclamationUser.detailsReclamation.toux}" />
+							</td>
+							<td>
+								<h:outputLabel value="#{gestionReclamationUser.detailsReclamation.fievre}" />
+							</td>
+							<td>
+								<h:outputLabel value="#{gestionReclamationUser.detailsReclamation.diffRespiratoire}" />
+							</td>
+							<td>
+								<h:outputLabel value="#{gestionReclamationUser.detailsReclamation.fatigue}" />
+
+							</td>
+							<td>
+								<h:outputLabel value="#{gestionReclamationUser.detailsReclamation.pneumonie}" />
+							</td>
+						</tr>
+					</table>
+
+					<div class='table'>
+						<div class="buttons-inline">
+							<label>Plus de details:</label>
+							<h:outputText class="login-input"
+								value="#{gestionReclamationUser.detailsReclamation.details}" />
+						</div>
+					</div>
+					<div class='table'>
+						<div class="buttons-inline">
+							<label>Decision docteur:</label>
+							<h:inputTextarea class="login-input"
+								value="#{gestionReclamationUser.detailsReclamation.reponse}" cols="30" rows="4"
+								required="true" />
+						</div>
+					</div>
+				</h:panelGroup>
+
+			</div>
+		</c:if>
+		<div class="container container-body">
+			<h1 class="h1-title">Consulter notre docteur</h1>
+
+			<h:form>
+
+				<h:panelGrid columns="2" style="margin-bottom:10px; width:100%">
+					<h:outputLabel for="@next" value="Numero de tel:" />
+					<h:inputText class="login-input" value="#{gestionReclamationUser.reclamation.numeroTel}" />
+
+					<h:outputLabel for="@next" value="Région:" />
+					<h:selectOneMenu id="region" class="login-input"
+						value="#{gestionReclamationUser.reclamation.region}" effect="fold" editable="true">
+						<f:selectItem itemLabel="Select One" itemValue="" />
+						<f:selectItems value="#{gestionReclamationUser.listeRegions}" />
+					</h:selectOneMenu>
+
+					<h:outputLabel for="@next" value="Degré de toux:" />
+					<p:selectOneRadio value="#{gestionReclamationUser.reclamation.toux}" layout="responsive"
+						columns="3">
+						<f:selectItem itemValue="faible" itemLabel="Faible" />
+						<f:selectItem itemValue="moyen" itemLabel="Moyen" />
+						<f:selectItem itemValue="grave" itemLabel="Grave" />
+					</p:selectOneRadio>
+
+					<h:outputLabel for="@next" value="Fièvre:" />
+					<p:selectOneRadio value="#{gestionReclamationUser.reclamation.fievre}" layout="responsive"
+						columns="3">
+						<f:selectItem itemValue="faible" itemLabel="Faible" />
+						<f:selectItem itemValue="moyen" itemLabel="Moyen" />
+						<f:selectItem itemValue="grave" itemLabel="Grave" />
+					</p:selectOneRadio>
+					<h:outputLabel for="@next" value="Taux de réspiration:" />
+					<p:selectOneRadio value="#{gestionReclamationUser.reclamation.diffRespiratoire}" layout="responsive"
+						columns="3">
+						<f:selectItem itemValue="faible" itemLabel="Faible" />
+						<f:selectItem itemValue="moyen" itemLabel="Moyen" />
+						<f:selectItem itemValue="grave" itemLabel="Grave" />
+					</p:selectOneRadio>
+					<h:outputLabel for="@next" value="Fatigue:" />
+					<p:selectOneRadio value="#{gestionReclamationUser.reclamation.fatigue}" layout="responsive"
+						columns="3">
+						<f:selectItem itemValue="oui" itemLabel="Oui" />
+						<f:selectItem itemValue="non" itemLabel="Non" />
+					</p:selectOneRadio>
+					<h:outputLabel for="@next" value="Vous avez un pneumonie:" />
+					<p:selectOneRadio value="#{gestionReclamationUser.reclamation.pneumonie}" layout="responsive"
+						columns="3">
+						<f:selectItem itemValue="oui" itemLabel="Oui" />
+						<f:selectItem itemValue="non" itemLabel="Non" />
+						<f:selectItem itemValue="aucune idee" itemLabel="aucune idee" />
+					</p:selectOneRadio>
+					<h:outputLabel for="@next" value="Plus de details:" />
+					<h:inputTextarea class="login-input" value="#{gestionReclamationUser.reclamation.details}"
+						rows="5" />
+				</h:panelGrid>
+				<div class="buttons-inline">
+					<h:commandButton class="btn btn-success" value="Envoyer"
+						action="#{gestionReclamationUser.action}" />
+				</div>
+			</h:form>
+		</div>
 	</div>
 	<script src="js/sortedTable.js"></script>
 	<script src="js/pop-up.js"></script>
 </h:body>
+
 </html>

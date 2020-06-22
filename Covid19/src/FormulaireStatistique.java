@@ -20,7 +20,7 @@ import metiers.*;
 
 @ManagedBean
 public class FormulaireStatistique {
-	// Fès-Meknès
+	// Fï¿½s-Meknï¿½s
 	private Statistique region1;
 	// Oriental
 	private Statistique region2;
@@ -28,25 +28,25 @@ public class FormulaireStatistique {
 	private Statistique region3;
 	// Souss-Massa
 	private Statistique region4;
-	// Drâa-Tafilalet
+	// Drï¿½a-Tafilalet
 	private Statistique region5;
 	// Marrakech-Safi
 	private Statistique region6;
 	// Casablanca-Settat
 	private Statistique region7;
-	// Béni Mellal-Khénifra
+	// Bï¿½ni Mellal-Khï¿½nifra
 	private Statistique region8;
-	// Tanger-Tétouan-Al Hoceïma
+	// Tanger-Tï¿½touan-Al Hoceï¿½ma
 	private Statistique region9;
-	// Rabat-Salé-Kénitra
+	// Rabat-Salï¿½-Kï¿½nitra
 	private Statistique region10;
 	// Dakhla-Oued Ed Dahab
 	private Statistique region11;
-	// Laâyoune-Sakia El Hamra
+	// Laï¿½youne-Sakia El Hamra
 	private Statistique region12;
-	String tableauRegions[] = { "Fès-Meknès", "Oriental", "Guelmim-Oued Noun", "Souss-Massa", "Drâa-Tafilalet",
-			"Marrakech-Safi", "Casablanca-Settat", "Béni Mellal-Khénifra", "Tanger-Tétouan-Al Hoceïma",
-			"Rabat-Salé-Kénitra", "Dakhla-Oued Ed Dahab", "Laâyoune-Sakia El Hamra" };
+	String tableauRegions[] = { "Fï¿½s-Meknï¿½s", "Oriental", "Guelmim-Oued Noun", "Souss-Massa", "Drï¿½a-Tafilalet",
+			"Marrakech-Safi", "Casablanca-Settat", "Bï¿½ni Mellal-Khï¿½nifra", "Tanger-Tï¿½touan-Al Hoceï¿½ma",
+			"Rabat-Salï¿½-Kï¿½nitra", "Dakhla-Oued Ed Dahab", "Laï¿½youne-Sakia El Hamra" };
 
 	public FormulaireStatistique() {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -85,7 +85,7 @@ public class FormulaireStatistique {
 
 	public String action() {
 		insertStatistiques();
-		return "Admin";
+		return "CheckStatistique";
 	}
 
 	public void insertStatistiques() {
@@ -118,7 +118,7 @@ public class FormulaireStatistique {
 			} else {
 				System.out.println("No such document!");
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -233,42 +233,42 @@ public class FormulaireStatistique {
 				int totalRecovered = Math.toIntExact((Long) document.get("totalRecovered"));
 				int TotalDeaths = Math.toIntExact((Long) document.get("totalDeaths"));
 				int totalTests = Math.toIntExact((Long) document.get("totalTests"));
-				int newCases = 0, newRecovered = 0, newDeaths = 0, newTests = 0,activecases;
+				int newCases = 0, newRecovered = 0, newDeaths = 0, newTests = 0, activecases;
 				for (int i = 0; i < 12; i++) {
 					newCases += list.get(i).getNewCases();
 					newRecovered += list.get(i).getNewRecovered();
 					newDeaths += list.get(i).getNewDeaths();
 					newTests += list.get(i).getTests();
 				}
-				totalCase+=newCases;
-				totalRecovered+=newRecovered;
-				TotalDeaths+=newDeaths;
-				totalTests+=newTests;
-				activecases=calculateActiveCases(totalCase,totalRecovered,TotalDeaths);
-				
+				totalCase += newCases;
+				totalRecovered += newRecovered;
+				TotalDeaths += newDeaths;
+				totalTests += newTests;
+				activecases = calculateActiveCases(totalCase, totalRecovered, TotalDeaths);
+
 				newData.put("totalCase", totalCase);
 				newData.put("totalRecovered", totalRecovered);
 				newData.put("totalDeaths", TotalDeaths);
-				newData.put("totalTests",totalTests);
+				newData.put("totalTests", totalTests);
 				newData.put("newCase", newCases);
 				newData.put("newRecovered", newRecovered);
 				newData.put("newDeaths", newDeaths);
 				newData.put("newTests", newTests);
 				newData.put("activeCases", activecases);
 
-				
 			} else {
 				System.out.println("No such document!");
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-	
+
 		return newData;
 
 	}
-	public int calculateActiveCases(int totalCase,int totalRecovered, int TotalDeaths) {
-		return totalCase-totalRecovered-TotalDeaths;
+
+	public int calculateActiveCases(int totalCase, int totalRecovered, int TotalDeaths) {
+		return totalCase - totalRecovered - TotalDeaths;
 	}
 
 }
