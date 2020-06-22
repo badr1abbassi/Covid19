@@ -1,39 +1,162 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/mobile" xmlns:c="http://java.sun.com/jstl/core">
 <h:head>
-	<title>ApplicationStatus</title>
+	<title>Liste des réclamations</title>
+	<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+	<link href="css/sb-admin-2.css" rel="stylesheet" />
+	<link href="css/style.css" rel="stylesheet" />
+	<script src="js/icons.js"></script>
 </h:head>
-<h:body>
-<h1>liste des reclamations</h1>
-	<div class="row">
-		<h:form>
-			<h:dataTable value="#{gestionReclamations.listReclamations}" var="reclamation"
-				style="margin-top:40px" reflow="true" paginator="true">
-				<h:column>
-					<!-- column header -->
-					<f:facet name="header">numero de tel:</f:facet>
-					<!-- row record -->
-    				#{reclamation.numeroTel}
-    			</h:column>
-    			<h:column>
-					<f:facet name="header">region:</f:facet>
-    				#{reclamation.region}
-    			</h:column>
-				<h:column>
-					<f:facet name="header">date:</f:facet>
-    				#{reclamation.time}
-    			</h:column>
-				<h:column>
-					<f:facet name="header">details</f:facet>
-					<h:commandButton value="more details"
-						actionListener="#{gestionReclamations.action(reclamation)}" />
-				</h:column>
-			</h:dataTable>
-		</h:form>
-	</div>
+<h:body class="body">
+	<nav class="navigation-bar">
+		<h:selectBooleanCheckbox id="check" />
+		<label for="check" class="checkbtn"><i class="fas fa-bars"></i></label>
+		<div class="log">
+			<h1>COVID 19</h1>
+		</div>
 
+		<ul class="nav-items">
+			<li class="consulter">
+				<h:form>
+					<h:commandButton value="Ajouter des données" action="#{admin.action}">
+						<f:param name="action" value="addStatistique" />
+					</h:commandButton>
+				</h:form>
+			</li>
+			<li class="consulter">
+				<h:form>
+					<h:commandButton value="Visualiser les statistiques" action="#{admin.action}">
+						<f:param name="action" value="checkStatistique" />
+					</h:commandButton>
+				</h:form>
+			</li>
+			<li class="consulter active">
+				<h:form>
+					<h:commandButton value="voir les reclamations" action="#{admin.action}">
+						<f:param name="action" value="checkReclamations" />
+					</h:commandButton>
+				</h:form>
+			</li>
+		</ul>
+
+		<div class="param">
+			<div class="last-par">
+				<ul>
+					<li id="li-dec">
+						<h:form class="consulter">
+							<h:commandLink action="#{admin.accueil}">
+								<i class="fa fa-sign-out" aria-hidden="true"></i>
+							</h:commandLink>
+						</h:form>
+					</li>
+					<p class="desc desc-dec" id="dec">Deconnexion</p>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="container-header container-img-header">
+			<div class="overlay"></div>
+			<img src="img/hope1.jpg" class="img-header" />
+			<h1 class="text-header">Réclamations</h1>
+		</div>
+		<div class="container-body">
+			<h:form class='table'>
+				<div class='table-div'>
+					<h:dataTable class="table table-sortable table-striped table-bordered table-sm"
+						value="#{gestionReclamations.listReclamations}" var="reclamation"
+						style="margin-top:40px; text-align:center" reflow="true" paginator="true">
+						<h:column>
+							<!-- column header -->
+							<f:facet name="header">Num de tel</f:facet>
+							<!-- row record -->
+							#{reclamation.numeroTel}
+						</h:column>
+						<h:column>
+							<f:facet name="header">Region:</f:facet>
+							#{reclamation.region}
+						</h:column>
+						<h:column>
+							<f:facet name="header">Date</f:facet>
+							#{reclamation.time}
+						</h:column>
+						<h:column>
+							<f:facet name="header">Details</f:facet>
+							<h:commandLink actionListener="#{gestionReclamations.action(reclamation)}">
+								<i class="fa fa-chevron-right" aria-hidden="true"></i>
+							</h:commandLink>
+						</h:column>
+
+					</h:dataTable>
+				</div>
+			</h:form>
+		</div>
+		<c:if test="#{not empty gestionReclamations.detailsReclamation}">
+			<div class="container-body">
+				<h:form rendered="#{not empty gestionReclamations.detailsReclamation }">
+
+					<h1>NUM de tél:
+						<h:outputLabel var="id" value="#{gestionReclamations.detailsReclamation.numeroTel}" />
+					</h1>
+					<div class="table-div">
+						<table class="table">
+							<THEAD>
+								<th>Région</th>
+								<th>Toux</th>
+								<th>Fièvre</th>
+								<th>Réspiration</th>
+								<th>Fatigue</th>
+								<th>Pneumonie</th>
+							</THEAD>
+							<tr>
+								<td>
+									<h:outputLabel value="#{gestionReclamations.detailsReclamation.region}" />
+								</td>
+								<td>
+									<h:outputLabel value="#{gestionReclamations.detailsReclamation.toux}" />
+								</td>
+								<td>
+									<h:outputLabel value="#{gestionReclamations.detailsReclamation.fievre}" />
+								</td>
+								<td>
+									<h:outputLabel value="#{gestionReclamations.detailsReclamation.diffRespiratoire}" />
+								</td>
+								<td>
+									<h:outputLabel value="#{gestionReclamations.detailsReclamation.fatigue}" />
+
+								</td>
+								<td>
+									<h:outputLabel value="#{gestionReclamations.detailsReclamation.pneumonie}" />
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class="buttons-inline">
+						<label>Plus de details:</label>
+						<h:inputText class="login-input" value="#{gestionReclamations.detailsReclamation.details}" />
+					</div>
+					<div class="buttons-inline">
+						<label>votre decision:</label>
+						<h:inputTextarea class="login-input" value="#{gestionReclamations.reponse}" cols="30" rows="4"
+							required="true" />
+					</div>
+					<div class="buttons-inline">
+						<h:commandButton class="btn btn-success" value="Envoyer"
+							action="#{gestionReclamations.myAction}" process="@this" ajax="false">
+							<f:param name="id" value="#{gestionReclamations.detailsReclamation.ID}" />
+						</h:commandButton>
+					</div>
+				</h:form>
+
+
+			</div>
+		</c:if>
+	</div>
+	<script src="js/sortedTable.js"></script>
+	<script src="js/pop-up.js"></script>
 </h:body>
+
 </html>

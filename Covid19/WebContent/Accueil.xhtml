@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui" xmlns:c="http://java.sun.com/jstl/core">
 <h:head>
 	<title>Accueil</title>
 	<!-- Custom fonts for this template-->
@@ -13,44 +13,50 @@
 </h:head>
 <h:body class='body'>
 	<nav class="nav-index">
-		<h1>Covid-19</h1>
+		<h1>
+			<h:form>
+				<h:commandLink value="Covid 19" action="#{admin.accueil}" style="color:#707070" />
+			</h:form>
+		</h1>
 		<div class="buttons-inline">
+			<div class="consulter">
+				<h:form>
+					<h:commandLink value="Sensibilisation" action="#{accueil.sensibilisation}" />
+				</h:form>
+			</div>
 			<div class="consulter">
 				<h:form>
 					<h:commandLink value="Consulter" action="#{accueil.consulter}" />
 				</h:form>
 			</div>
 			<h:commandButton id="admin" class="btn btn-success" value="Admin" />
-			
 		</div>
 	</nav>
 	<div class="bg-modal" id="modal">
-            <div class="modal-content">
-                <div class="close" id="close">+</div>
-              
+		<div class="modal-content">
+			<div class="close" id="close">+</div>
+			<div class="container-body">
+				<h:form class="form-user" rendered="#{empty accueil.message}">
+					<h1>Covid19</h1>
+					<div>
+						<label>
+							<span>Identifiant</span>
+							<p:inputText class='login-input' value="#{accueil.login}" />
+						</label>
+					</div>
+					<div>
+						<label>
+							<span>Mot de passe</span>
+							<p:password class='login-input' value="#{accueil.mdp}" />
+						</label>
+					</div>
+					<h:commandButton class="btn btn-success" value="Login" action="#{accueil.action}" />
 
-                <div class="container-body">
-                    <h:form class="form-user" rendered="#{empty accueil.message}">
-                    <h1>Covid-19</h1>
-                    <div>
-						<label>
-                            <span>Identifiant</span>
-                            <h:inputText class='login-input' value="#{accueil.login}" />
-                        </label>
-						</div>
-						<div>
-						<label>
-                            <span>Mot de passe</span>
-                            <h:inputText class='login-input' value="#{accueil.mdp}" />
-                        </label>
-						</div>
-						<h:commandButton class="btn btn-success" value="Login" action="#{accueil.action}" />
-					
-			</h:form>
-                    
-                </div>
-            </div>
-        </div>
+				</h:form>
+
+			</div>
+		</div>
+	</div>
 
 	<div class="container">
 		<!-- 
@@ -64,7 +70,7 @@
 		</div>
  -->
 
-		<div class="columns container-body">
+		<div class="columns margin">
 			<!-- Earnings (Monthly) Card Example -->
 			<div class="col">
 				<div class="card border-left-warning shadow h-100 py-2">
@@ -156,6 +162,34 @@
 					</div>
 				</div>
 			</div>
+			<div class="col">
+				<div class="card border-left-info shadow h-100 py-2">
+					<div class="card-body">
+						<div class="row no-gutters align-items-center">
+							<div class="col mr-2">
+								<div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total
+									testes
+								</div>
+								<div class="row no-gutters align-items-center">
+									<div class="col-auto">
+										<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+											<h:outputLabel value="#{accueil.totalTests}" />
+										</div>
+									</div>
+
+								</div>
+							</div>
+							<div class="col-auto">
+								<i class="fas fa-info-circle fa-2x text-info"></i>
+							</div>
+
+						</div>
+						<div class="h5 mb-0 font-weight-bold text-info">
+							<h:outputLabel value="#{accueil.newTests}" />
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 		<div class="container-body">
 			<p:chart type="bar" model="#{accueil.barModel}" />
@@ -164,155 +198,192 @@
 		<div class="container-body">
 			<h1>Les statistiques des regions</h1>
 			<h:form class='table'>
-				<h:dataTable class="table table-sortable table-striped table-bordered table-sm"
-					value="#{accueil.listRegion}" var="region" reflow="true" paginator="true">
-					<h:column class="tab-col">
-						<!-- column header -->
-						<f:facet name="header">Nom</f:facet>
-						<!-- row record -->
-						#{region.nom}
-					</h:column>
-					<h:column>
-						<f:facet name="header">Total Cases</f:facet>
-						#{region.totalCases}
-					</h:column>
-					<h:column>
-						<f:facet name="header">Total Revovered</f:facet>
-						#{region.totalRecovered}
-					</h:column>
-					<h:column>
-						<f:facet name="header">Total Death</f:facet>
-						#{region.totalDeaths}
-					</h:column>
-					<h:column>
-						<f:facet name="header">Total Tests</f:facet>
-						#{region.totalTests}
-					</h:column>
-					<h:column>
-						<h:commandButton value="Détails" action="#{accueil.details(region)}" />
-					</h:column>
-				</h:dataTable>
-			</h:form>
-		</div>
-
-		<div class="container-body">
-			<h:panelGroup rendered="#{not empty accueil.regionForDetails}">
-				<h1>
-					<h:outputLabel value="#{accueil.regionForDetails.nom}" />
-				</h1>
-				<div class="row table">
-					<div class="col">
-						<div class="card border-left-warning shadow h-100 py-2">
-							<div class="card-body">
-								<div class="row no-gutters align-items-center">
-									<div class="col mr-2">
-										<div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total
-											Cases
-										</div>
-										<div class="row no-gutters align-items-center">
-											<div class="col-auto">
-												<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-													<h:outputLabel value="#{accueil.regionForDetails.totalCases}" />
-												</div>
-											</div>
-
-										</div>
-									</div>
-									<div class="col-auto">
-										<i class="fas fa-bell fa-2x text-warning"></i>
-									</div>
-
-								</div>
-
-							</div>
-						</div>
-					</div>
-					<div class="col">
-						<div class="card border-left-danger shadow h-100 py-2">
-							<div class="card-body">
-								<div class="row no-gutters align-items-center">
-									<div class="col mr-2">
-										<div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-											Total Deaths
-										</div>
-										<div class="row no-gutters align-items-center">
-											<div class="col-auto">
-												<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-													<h:outputLabel value="#{accueil.regionForDetails.totalDeaths}" />
-												</div>
-											</div>
-
-										</div>
-									</div>
-									<div class="col-auto">
-										<i class="fas fa-times fa-2x text-danger"></i>
-									</div>
-								</div>
-
-							</div>
-						</div>
-					</div>
-					<div class="col">
-						<div class="card border-left-success shadow h-100 py-2">
-							<div class="card-body">
-								<div class="row no-gutters align-items-center">
-									<div class="col mr-2">
-										<div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total
-											Recovered</div>
-										<div class="row no-gutters align-items-center">
-											<div class="col-auto">
-												<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-													<h:outputLabel value="#{accueil.regionForDetails.totalRecovered}" />
-												</div>
-											</div>
-
-										</div>
-									</div>
-									<div class="col-auto">
-										<i class="fas fa-heart fa-2x text-success"></i>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-
-				</div>
-
-				<div class="row table">
+				<div class="table-div">
 					<h:dataTable class="table table-sortable table-striped table-bordered table-sm"
-						value="#{accueil.regionForDetails.listStatistique}" var="statistique" style="margin-top:40px"
-						reflow="true" paginator="true">
-						<h:column>
+						value="#{accueil.listRegion}" var="region" reflow="true" paginator="true"
+						style="text-align:center">
+						<h:column class="tab-col">
 							<!-- column header -->
-							<f:facet name="header">Date</f:facet>
+							<f:facet name="header">Nom</f:facet>
 							<!-- row record -->
-							#{statistique.date}
+							#{region.nom}
 						</h:column>
 						<h:column>
-							<f:facet name="header">new Cases</f:facet>
-							#{statistique.newCases}
-						</h:column>
-
-						<h:column>
-							<f:facet name="header">new Deaths</f:facet>
-							#{statistique.newDeaths}
+							<f:facet name="header">Total Cases</f:facet>
+							#{region.totalCases}
 						</h:column>
 						<h:column>
-							<f:facet name="header">new Recovered</f:facet>
-							#{statistique.newRecovered}
+							<f:facet name="header">Total Revovered</f:facet>
+							#{region.totalRecovered}
 						</h:column>
 						<h:column>
-							<f:facet name="header">Nouveaux testes</f:facet>
-							#{statistique.tests}
+							<f:facet name="header">Total Death</f:facet>
+							#{region.totalDeaths}
+						</h:column>
+						<h:column>
+							<f:facet name="header">Total Tests</f:facet>
+							#{region.totalTests}
+						</h:column>
+						<h:column>
+							<f:facet name="header">Details</f:facet>
+							<h:commandLink action="#{accueil.details(region)}">
+								<i class="fa fa-chevron-right" aria-hidden="true"></i>
+							</h:commandLink>
 						</h:column>
 					</h:dataTable>
 				</div>
-			</h:panelGroup>
-
+			</h:form>
 		</div>
+		<c:if test="#{not empty accueil.regionForDetails}">
+			<div class="container-body">
+				<h:panelGroup rendered="#{not empty accueil.regionForDetails}">
+					<h1>
+						<h:outputLabel value="#{accueil.regionForDetails.nom}" />
+					</h1>
+					<div class="row table columns">
+						<div class="col">
+							<div class="card border-left-warning shadow h-100 py-2">
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+											<div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total
+												Cases
+											</div>
+											<div class="row no-gutters align-items-center">
+												<div class="col-auto">
+													<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+														<h:outputLabel value="#{accueil.regionForDetails.totalCases}" />
+													</div>
+												</div>
+
+											</div>
+										</div>
+										<div class="col-auto">
+											<i class="fas fa-bell fa-2x text-warning"></i>
+										</div>
+
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<div class="col">
+							<div class="card border-left-danger shadow h-100 py-2">
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+											<div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+												Total Deaths
+											</div>
+											<div class="row no-gutters align-items-center">
+												<div class="col-auto">
+													<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+														<h:outputLabel
+															value="#{accueil.regionForDetails.totalDeaths}" />
+													</div>
+												</div>
+
+											</div>
+										</div>
+										<div class="col-auto">
+											<i class="fas fa-times fa-2x text-danger"></i>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<div class="col">
+							<div class="card border-left-success shadow h-100 py-2">
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+											<div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total
+												Recovered</div>
+											<div class="row no-gutters align-items-center">
+												<div class="col-auto">
+													<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+														<h:outputLabel
+															value="#{accueil.regionForDetails.totalRecovered}" />
+													</div>
+												</div>
+
+											</div>
+										</div>
+										<div class="col-auto">
+											<i class="fas fa-heart fa-2x text-success"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col">
+							<div class="card border-left-info shadow h-100 py-2">
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+											<div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total
+												testes
+											</div>
+											<div class="row no-gutters align-items-center">
+												<div class="col-auto">
+													<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+														<h:outputLabel value="#{accueil.regionForDetails.totalTests}" />
+													</div>
+												</div>
+
+											</div>
+										</div>
+										<div class="col-auto">
+											<i class="fas fa-info-circle fa-2x text-info"></i>
+										</div>
+
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="row table">
+						<div class="table-div">
+							<h:dataTable class="table table-sortable table-striped table-bordered table-sm"
+								value="#{accueil.regionForDetails.listStatistique}" var="statistique"
+								style="margin-top:40px" reflow="true" paginator="true">
+								<h:column>
+									<!-- column header -->
+									<f:facet name="header">Date</f:facet>
+									<!-- row record -->
+									#{statistique.date}
+								</h:column>
+								<h:column>
+									<f:facet name="header">new Cases</f:facet>
+									#{statistique.newCases}
+								</h:column>
+
+								<h:column>
+									<f:facet name="header">new Deaths</f:facet>
+									#{statistique.newDeaths}
+								</h:column>
+								<h:column>
+									<f:facet name="header">new Recovered</f:facet>
+									#{statistique.newRecovered}
+								</h:column>
+								<h:column>
+									<f:facet name="header">Nouveaux testes</f:facet>
+									#{statistique.tests}
+								</h:column>
+							</h:dataTable>
+						</div>
+					</div>
+				</h:panelGroup>
+
+			</div>
+		</c:if>
 	</div>
 	<script src="js/sortedTable.js"></script>
+	<script src="js/icons.js"></script>
 	<script src="js/pop-up.js"></script>
 </h:body>
 

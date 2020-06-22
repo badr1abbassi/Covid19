@@ -38,7 +38,6 @@ public class CheckStatistique {
 				FirebaseApp.initializeApp(options);
 			}
 			for (int i = 0; i < 12; i++) {
-				System.out.println("region " + tableauRegions[i]);
 				Region region = new Region(tableauRegions[i]);
 				ApiFuture<QuerySnapshot> statisticRef = FirestoreClient.getFirestore().collection("national")
 						.document("nationalStatistique").collection("regions").document(tableauRegions[i])
@@ -47,7 +46,6 @@ public class CheckStatistique {
 
 				for (QueryDocumentSnapshot doc : documents) {
 					Statistique ss = doc.toObject(Statistique.class);
-					System.out.println(doc.getId() + " => " + doc.toObject(Statistique.class));
 					region.addStatistique(doc.toObject(Statistique.class));
 				}
 				region.setTotalCases(region.getTotalCases_());
@@ -60,7 +58,6 @@ public class CheckStatistique {
 			e.printStackTrace();
 		}
 		size = listRegion.size();
-		System.out.println("taille=" + listRegion.size() + "\nexemple = " + listRegion.get(0).getNom());
 
 	}
 

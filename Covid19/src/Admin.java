@@ -15,7 +15,6 @@ public class Admin {
 	      switch(actionValue) 
 	        { 
 	            case "addStatistique": 
-	                System.out.println("addStatistique");
 	                return "FormulaireStatistique";
 	               
 	            case "checkStatistique": 
@@ -26,6 +25,9 @@ public class Admin {
 	            default: 
 	                System.out.println("no match"); 
 	        }
+	      return "Accueil";
+	}
+	public String accueil() {
 	      return "Accueil";
 	}
 

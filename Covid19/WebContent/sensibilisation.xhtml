@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:c="http://java.sun.com/jstl/core">
+<h:head>
+	<title>Sensibilisation</title>
+	<!-- Custom fonts for this template-->
+	<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+
+
+	<!-- Custom styles for this template-->
+	<link href="css/sb-admin-2.min.css" rel="stylesheet" />
+	<link href="css/style.css" rel="stylesheet" />
+</h:head>
+<h:body class='body'>
+	<nav class="navigation-bar">
+		<h1>
+			<h:form>
+				<h:commandLink value="Covid 19" action="#{admin.accueil}" style="color:#707070" />
+			</h:form>
+		</h1>
+		<div class="buttons-inline">
+			<div class="consulter">
+				<h:form>
+					<h:commandLink value="Consulter" action="#{accueil.consulter}" />
+				</h:form>
+			</div>
+			<div class="consulter active">
+				<h:form>
+					<h:commandLink value="Sensibilisation" action="#{accueil.sensibilisation}" />
+				</h:form>
+			</div>
+			<h:commandButton id="admin" class="btn btn-success" value="Admin" />
+
+		</div>
+	</nav>
+	<div class="container">
+		<img src="img/corona.jpg" />
+	</div>
+	<script src="js/sortedTable.js"></script>
+	<script src="js/pop-up.js"></script>
+</h:body>
+
+</html>
